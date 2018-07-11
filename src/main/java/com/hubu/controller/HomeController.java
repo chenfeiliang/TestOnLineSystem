@@ -3,7 +3,11 @@ package com.hubu.controller;
 import com.hubu.dao.UserDTO;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.Paper;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+@Controller
 public class HomeController {
 
     /*
@@ -11,8 +15,10 @@ public class HomeController {
      * 操作：校验信息是否符合格式，用户是否存在,合格则，添加用户信息
      * 输出：注册结果
      * */
+    @RequestMapping
+    @ResponseBody
     public Msg register(UserDTO userDTO){
-        return new Msg().success().add("","");
+        return new Msg().success().add("hello","hello");
     }
 
     /*
