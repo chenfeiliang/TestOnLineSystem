@@ -1,6 +1,5 @@
 package com.hubu.controller;
 
-import com.hubu.dao.UserDTO;
 import com.hubu.dto.AdminDTO;
 import com.hubu.pojo.Msg;
 

@@ -1,6 +1,7 @@
 package com.hubu.controller;
 
-import com.hubu.dao.UserDTO;
+
+import com.hubu.dto.UserDTO;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.Paper;
 import org.springframework.stereotype.Controller;

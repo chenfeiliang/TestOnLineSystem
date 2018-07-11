@@ -1,15 +1,37 @@
 package com.hubu.controller;
 
+import com.hubu.dto.UserDTO;
 import com.hubu.pojo.Msg;
+import com.hubu.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+@Controller
 public class UserController {
+    @Autowired
+    UserService userService;
     /*
      * 输入：用户信息
      * 操作：存储用户信息
      * 输出：操作结果
      * */
-    public Msg addUser(){
-        return  new Msg().success().add("","");
+    @RequestMapping("/addUser")
+    @ResponseBody
+    public Msg addUser(UserDTO userDTO){
+//
+//        UserDTO userDTO1 = new UserDTO();
+//        userDTO1.setAccount("jza");
+//        userDTO1.setClassId(1);
+//        userDTO1.setImage("aa");
+//        userDTO1.setMobile("aaa");
+//        userDTO1.setPassword("sss");
+//        userDTO1.setRealName("ss");
+//        userDTO1.setRePassword("sss");
+//        userDTO = userDTO1;
+
+        return  userService.addUser(userDTO) == 1 ? new Msg().success(): new Msg().fail();
     }
 
     /*
@@ -36,6 +58,7 @@ public class UserController {
      * 输出：用户列表
      * */
     public Msg getPageUser(int cp){
+
         return  new Msg().success().add("","");
     }
 
