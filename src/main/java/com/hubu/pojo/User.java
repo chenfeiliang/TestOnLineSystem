@@ -66,6 +66,9 @@ public class User {
         mobile = user.getMobile();
         image = user.getImage();
     }
+    public User(){
+
+    }
 
     @Override
     public String toString() {

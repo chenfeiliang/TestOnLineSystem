@@ -7,11 +7,44 @@ import com.hubu.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
     UserDAO userDAO;
-    public Integer addUser(UserDTO user) {
-        return userDAO.addUser(new User(user));
+    private int pageCount = 10;
+
+    public Msg addUser(UserDTO user) {
+        return userDAO.addUser(new User(user)) == 1 ? new Msg().success() : new Msg().fail();
+    }
+
+    public Msg deleteUser(String account) {
+        return userDAO.deleteUser(account) == 1 ? new Msg().success() : new Msg().fail();
+    }
+
+    public Msg updateUser(User user) {
+        return userDAO.updateUser(user) == 1 ? new Msg().success() : new Msg().fail();
+    }
+
+    public Msg findPageUser(int currentPage) {
+        try {
+            List<User> users = userDAO.selectPageUser ((currentPage-1)*pageCount,pageCount);
+            return new Msg().success().add("result",users);
+        }catch (Exception e){
+            return new Msg().fail();
+        }
+
+
+    }
+
+    public Msg getPageUserByKeyWord(int currentPage, String keyword) {
+        try {
+            List<User> users = userDAO.selectPageUserByKeyWord((currentPage-1)*pageCount,pageCount,keyword);
+            return new Msg().success().add("result",users);
+        }catch (OutOfMemoryError e){
+            return new Msg().fail();
+        }
+
     }
 }
