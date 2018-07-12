@@ -32,6 +32,7 @@ public class UserService {
             List<User> users = userDAO.selectPageUser ((currentPage-1)*pageCount,pageCount);
             return new Msg().success().add("result",users);
         }catch (Exception e){
+            e.printStackTrace();
             return new Msg().fail();
         }
 

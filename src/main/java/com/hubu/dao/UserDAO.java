@@ -3,6 +3,7 @@ package com.hubu.dao;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.User;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 

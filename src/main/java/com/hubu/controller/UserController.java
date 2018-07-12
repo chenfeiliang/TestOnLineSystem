@@ -76,6 +76,7 @@ public class UserController {
     @ResponseBody
     public Msg getPageUser(int currentPage){
 //        int currentPage = 1;
+        System.out.println(currentPage);
         return  userService.findPageUser(currentPage);
     }
 
