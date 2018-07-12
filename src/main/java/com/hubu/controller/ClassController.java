@@ -30,9 +30,10 @@ public class ClassController {
      * 操作：删除班级信息
      * 输出：操作结果
      * */
-    @RequestMapping(path = "deleteClass",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(path = "/deleteClass",method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public Msg deleteClass(int classId){
+    public Msg deleteClass(Integer classId){
+        classId = 5;
         return classService.deleteClass(classId);
     }
 
@@ -54,8 +55,11 @@ public class ClassController {
      * 操作：分页查询班级信息
      * 输出：班级列表
      * */
-    public Msg getPageClass(int cp){
-        return  new Msg().success().add("","");
+    @RequestMapping(path = "/getPageClass",method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public Msg getPageClass(Integer currentPage){
+        currentPage = 1;
+        return  classService.getPageClass(currentPage);
     }
 
     /*
@@ -63,7 +67,11 @@ public class ClassController {
      * 操作：通过关键词分页查询班级信息
      * 输出：班级列表
      * */
-    public Msg getPageClassByKeyWord(int cp , String keyword){
-        return  new Msg().success().add("","");
+    @RequestMapping(path = "/getPageClassByKeyWord",method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public Msg getPageClassByKeyWord(Integer currentPage , String keyword){
+        currentPage = 1;
+        keyword = "圾";
+        return classService.getPageClassByKeyWord(currentPage,keyword);
     }
 }

@@ -29,8 +29,7 @@ public class UserService {
 
     public Msg findPageUser(int currentPage) {
         try {
-            List<User> users = userDAO.selectPageUser ((currentPage-1)*pageCount,pageCount);
-            return new Msg().success().add("result",users);
+            return new Msg().success().add("result",userDAO.selectPageUser ((currentPage-1)*pageCount,pageCount));
         }catch (Exception e){
             return new Msg().fail();
         }
@@ -40,8 +39,7 @@ public class UserService {
 
     public Msg getPageUserByKeyWord(int currentPage, String keyword) {
         try {
-            List<User> users = userDAO.selectPageUserByKeyWord((currentPage-1)*pageCount,pageCount,keyword);
-            return new Msg().success().add("result",users);
+            return new Msg().success().add("result",userDAO.selectPageUserByKeyWord((currentPage-1)*pageCount,pageCount,keyword));
         }catch (OutOfMemoryError e){
             return new Msg().fail();
         }
