@@ -40,4 +40,6 @@ public interface ClassDAO {
             @Result(property = "className",column = "className")
     })
     MyClass selectClassById(Integer classId);
+    @Delete({"delete from",TABLE_NAME,"where classId in (${classIds})"})
+    Integer batchDeleteClassById(@Param("classIds") String classIds);
 }

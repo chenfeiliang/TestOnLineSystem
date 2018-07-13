@@ -92,6 +92,42 @@
 
 备注：×
 
+#### 根据id查找班级
+
+接口序号：MGL_class_006
+
+接口名称：getClassByClassId
+
+接口链接：/getClassByClassId
+
+输入：classId
+
+处理描述：根据id查找班级的信息
+
+输出：状态码 成功200,true,MyClass/失败500,false
+
+作者：MGL
+
+备注：×
+
+#### 批量删除班级
+
+接口序号：MGL_class_007
+
+接口名称：batchDeleteClassById
+
+接口链接：/batchDeleteClassById
+
+输入：classIds
+
+处理描述 批量删除班级信息
+
+输出：状态码 成功200,true/失败500,false
+
+作者：MGL
+
+备注：×
+
 ## 课程
 
 #### 添加课程

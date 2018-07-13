@@ -29,7 +29,7 @@ public class ClassController {
      * 操作：删除班级信息
      * 输出：操作结果
      * */
-    @RequestMapping(path = "/deleteClass",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(path = "/deleteClass",method = {RequestMethod.GET})
     @ResponseBody
     public Msg deleteClass(Integer classId){
         return classService.deleteClass(classId) == 1 ? new Msg().success() : new Msg().fail();
@@ -40,7 +40,7 @@ public class ClassController {
      * 操作：更新班级信息
      * 输出：操作结果
      * */
-    @RequestMapping(path = "/updateClass",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(path = "/updateClass",method = {RequestMethod.GET})
     @ResponseBody
     public Msg updateClass(MyClass myClass){
         return classService.updateClass(myClass) == 1 ? new Msg().success() : new Msg().fail();
@@ -51,7 +51,7 @@ public class ClassController {
      * 操作：分页查询班级信息
      * 输出：班级列表
      * */
-    @RequestMapping(path = "/getPageClass",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(path = "/getPageClass",method = {RequestMethod.GET})
     @ResponseBody
     public Msg getPageClass(Integer currentPage){
         List<MyClass> pageClass = classService.getPageClass(currentPage);
@@ -65,10 +65,22 @@ public class ClassController {
      * 操作：通过关键词分页查询班级信息
      * 输出：班级列表
      * */
-    @RequestMapping(path = "/getPageClassByKeyWord",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(path = "/getPageClassByKeyWord",method = {RequestMethod.GET})
     @ResponseBody
     public Msg getPageClassByKeyWord(Integer currentPage , String keyword){
         List<MyClass> pageClassByKeyWord = classService.getPageClassByKeyWord(currentPage, keyword);
         return pageClassByKeyWord == null ? new Msg().fail() : new Msg().success().add("result",pageClassByKeyWord);
+    }
+
+    @RequestMapping(path = "/getClassByClassId",method = {RequestMethod.GET})
+    @ResponseBody
+    public Msg getClassByClassId(Integer classId){
+        MyClass myClass = classService.getClassByClassId(classId);
+        return myClass == null ? new Msg().fail() : new Msg().success().add("result",myClass);
+    }
+    @RequestMapping(path = "/batchDeleteClassById",method = RequestMethod.GET)
+    @ResponseBody
+    public Msg batchDeleteClassById(String classIds){
+        return classService.batchDeleteClassById(classIds) > 0 ? new Msg().success() : new Msg().fail();
     }
 }

@@ -6,6 +6,7 @@ import com.hubu.pojo.MyClass;
 import com.hubu.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -56,6 +57,24 @@ public class ClassService {
         }catch (Exception e){
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public MyClass getClassByClassId(Integer classId) {
+        try {
+            return classDAO.selectClassById(classId);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    @Transactional(rollbackFor={RuntimeException.class, Exception.class})
+    public Integer batchDeleteClassById(String classIds) {
+        try {
+            return classDAO.batchDeleteClassById(classIds);
+        }catch (Exception e){
+            e.printStackTrace();
+            return -1;
         }
     }
 }
