@@ -41,14 +41,14 @@ public class Msg {
     public  Msg success(){
         Msg result = new Msg();
         result.code = 200;
-        result.setMsg("处理成功！");
+        result.setMsg("true");
         return  result;
     }
 
     public Msg fail(){
         Msg result = new Msg();
         result.code = 500;
-        result.setMsg("处理失败！");
+        result.setMsg("false");
         return  result;
     }
 
