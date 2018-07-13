@@ -5,9 +5,8 @@ import com.hubu.pojo.MyClass;
 import com.hubu.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
 @Controller
 public class ClassController {
     @Autowired
@@ -18,9 +17,8 @@ public class ClassController {
      * 输出：操作结果
      * */
     @RequestMapping(path = "/addClass",method = {RequestMethod.GET,RequestMethod.POST})
-//    @ResponseBody
+    @ResponseBody
     public Msg addClass(MyClass myClass){
-//        MyClass myClass = new MyClass();
 //        myClass.setClassName("垃圾软产");
         return classService.addClass(myClass);
     }
@@ -31,7 +29,7 @@ public class ClassController {
      * 输出：操作结果
      * */
     @RequestMapping(path = "/deleteClass",method = {RequestMethod.GET,RequestMethod.POST})
-    @ResponseBody
+//    @ResponseBody
     public Msg deleteClass(Integer classId){
         classId = 5;
         return classService.deleteClass(classId);
