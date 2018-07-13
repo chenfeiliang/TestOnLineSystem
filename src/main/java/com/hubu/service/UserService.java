@@ -31,6 +31,7 @@ public class UserService {
         try {
             return new Msg().success().add("result",userDAO.selectPageUser ((currentPage-1)*pageCount,pageCount));
         }catch (Exception e){
+            e.printStackTrace();
             return new Msg().fail();
         }
 

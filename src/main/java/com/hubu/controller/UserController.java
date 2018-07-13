@@ -74,8 +74,8 @@ public class UserController {
      * */
     @RequestMapping(path = "/getPageUser",method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public Msg getPageUser(Integer currentPage){
-//        Integer currentPage = 1;
+    public Msg getPageUser(int currentPage){
+//        int currentPage = 1;
         return  userService.findPageUser(currentPage);
     }
 
@@ -85,10 +85,10 @@ public class UserController {
      * 输出：用户列表
      * */
     @RequestMapping("/getPageUserByKeyWord")
-//    @ResponseBody
-    public Msg getPageUserByKeyWord(int currentPage,String keyword){
-//        int currentPage  = 1;
-//        String keyword = "z";
+    @ResponseBody
+    public Msg getPageUserByKeyWord(){
+        int currentPage  = 1;
+        String keyword = "z";
         return  userService.getPageUserByKeyWord(currentPage,keyword);
     }
 }
