@@ -27,7 +27,9 @@ public interface UserDAO {
             @Result(id = true,column = "account",property = "account"),
             @Result(column = "realName",property = "realName"),
             @Result(column = "password",property = "password"),
-            @Result(column = "classId",property = "classId"),
+            @Result(column = "classId",property = "myClass",
+                    one = @One(select = "com.hubu.dao.ClassDAO.selectClassById")
+            ),
             @Result(column = "mobile",property = "mobile"),
             @Result(column = "image",property = "image")
     })
@@ -38,7 +40,9 @@ public interface UserDAO {
             @Result(id = true,column = "account",property = "account"),
             @Result(column = "realName",property = "realName"),
             @Result(column = "password",property = "password"),
-            @Result(column = "classId",property = "classId"),
+            @Result(column = "classId",property = "myClass",
+                    one = @One(select = "com.hubu.dao.ClassDAO.selectClassById")
+            ),
             @Result(column = "mobile",property = "mobile"),
             @Result(column = "image",property = "image")
     })

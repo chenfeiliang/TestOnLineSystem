@@ -14,11 +14,11 @@ public interface ClassDAO {
     @Insert("insert into" + TABLE_NAME + "(" + INSERT_FIELDS + ") values(#{className})")
     int insertClass(MyClass myClass);
 
-    @Update("update" + TABLE_NAME + "set className=#{className} where classId = #{classId}")
-    int updateClass(MyClass myClass);
-
     @Delete("delete from" + TABLE_NAME + "where classId=#{classId}")
     int deleteClass(int classId);
+
+    @Update("update" + TABLE_NAME + "set className=#{className} where classId = #{classId}")
+    int updateClass(MyClass myClass);
 
     @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME,"limit #{currentPage},#{pageCount}"})
     @Results({
@@ -33,4 +33,11 @@ public interface ClassDAO {
             @Result(property = "className",column = "className")
     })
     List<MyClass> selectPageClassByKeyWord(@Param("currentPage") int currentPage,@Param("pageCount") Integer pageCount,@Param("keyWord") String keyWord);
+
+    @Select({"select ",SELECT_FIELDS,"from",TABLE_NAME,"where ClassId = #{classId}"})
+    @Results({
+            @Result(id = true,property = "classId",column = "classId"),
+            @Result(property = "className",column = "className")
+    })
+    MyClass selectClassById(Integer classId);
 }

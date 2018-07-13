@@ -11,7 +11,11 @@ public interface LessonDAO {
     String INSERT_FIELDS = " lessonName ";
     String SELECT_FIELDS = " lessonId,lessonName ";
 
-    @Select("select lessonName from" + TABLE_NAME + "where lessonId = #{lessonId}")
+    @Select({"select",SELECT_FIELDS,"from" + TABLE_NAME + "where lessonId = #{lessonId}"})
+    @Results({
+            @Result(id = true,property = "lessonId",column = "lessonId"),
+            @Result(property = "lessonName",column = "lessonName")
+    })
     String selectLessonIdByName(Integer lessonId);
 
     @Insert({"insert into",TABLE_NAME,"(",INSERT_FIELDS,") values(#{lessonName})"})

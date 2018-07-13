@@ -11,19 +11,6 @@ public interface QuestionDAO {
     String INSERT_FIELDS = " questionId,title,optionA,optionB,optionC,optionD,questionKey,questionLevel,lessonId,creator ";
     String SELECT_FIELDS = " questionId,title,optionA,optionB,optionC,optionD,questionKey,questionLevel,lessonId,creator ";
     @Insert("insert into" + TABLE_NAME + "(" + INSERT_FIELDS +") values(#{title},#{optionA},#{optionB},#{optionC},#{optionD},#{questionKey},#{questionLevel},#{lessonId},#{creator})")
-//    @Results({
-//            @Result(id = true,property = "title",column = "title"),
-//            @Result(property = "optionA",column = "optionA"),
-//            @Result(property = "optionB",column = "optionB"),
-//            @Result(property = "optionC",column = "optionC"),
-//            @Result(property = "optionD",column = "optionD"),
-//            @Result(property = "questionKey",column = "questionKey"),
-//            @Result(property = "questionLevel",column = "questionLevel"),
-//            @Result(property = "lessonId",column = "lessonId"
-////                    ,one = @One(select = "com.hubu.dao.LessonDAO.selectLessonIdByName")
-//            ),
-//            @Result(property = "creator",column = "creator"),
-//    })
     Integer insertQuestion(Question question);
 
     @Delete({"delete from",TABLE_NAME,"where questionId = #{questionId}"})
@@ -42,7 +29,9 @@ public interface QuestionDAO {
             @Result(column = "optionD",property = "optionD"),
             @Result(column = "questionKey",property = "questionKey"),
             @Result(column = "questionLevel",property = "questionLevel"),
-            @Result(column = "lessonId",property = "lessonId"),
+            @Result(column = "lessonId",property = "lesson",
+                    one = @One(select = "com.hubu.dao.LessonDAO.selectLessonIdByName")
+            ),
             @Result(column = "creator",property = "creator")
     })
     List<Question> getPageQuestion(Integer currentPage);
