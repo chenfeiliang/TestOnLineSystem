@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class ClassController {
     @Autowired
@@ -16,11 +18,10 @@ public class ClassController {
      * 操作：存储班级信息
      * 输出：操作结果
      * */
-    @RequestMapping(path = "/addClass",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(path = "/addClass",method = {RequestMethod.POST})
     @ResponseBody
     public Msg addClass(MyClass myClass){
-//        myClass.setClassName("垃圾软产");
-        return classService.addClass(myClass);
+        return classService.addClass(myClass) == 1 ? new Msg().success() : new Msg().fail();
     }
 
     /*
@@ -29,10 +30,9 @@ public class ClassController {
      * 输出：操作结果
      * */
     @RequestMapping(path = "/deleteClass",method = {RequestMethod.GET,RequestMethod.POST})
-//    @ResponseBody
+    @ResponseBody
     public Msg deleteClass(Integer classId){
-        classId = 5;
-        return classService.deleteClass(classId);
+        return classService.deleteClass(classId) == 1 ? new Msg().success() : new Msg().fail();
     }
 
     /*
@@ -41,11 +41,9 @@ public class ClassController {
      * 输出：操作结果
      * */
     @RequestMapping(path = "/updateClass",method = {RequestMethod.GET,RequestMethod.POST})
-//    @ResponseBody
+    @ResponseBody
     public Msg updateClass(MyClass myClass){
-//        myClass.setClassId(1);
-//        myClass.setClassName("垃圾软产");
-        return classService.updateClass(myClass);
+        return classService.updateClass(myClass) == 1 ? new Msg().success() : new Msg().fail();
     }
 
     /*
@@ -56,9 +54,11 @@ public class ClassController {
     @RequestMapping(path = "/getPageClass",method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public Msg getPageClass(Integer currentPage){
-        currentPage = 1;
-        return  classService.getPageClass(currentPage);
+        List<MyClass> pageClass = classService.getPageClass(currentPage);
+        return pageClass == null ? new Msg().fail() : new Msg().success().add("result",pageClass);
     }
+
+
 
     /*
      * 输入：页码，关键词
@@ -68,8 +68,7 @@ public class ClassController {
     @RequestMapping(path = "/getPageClassByKeyWord",method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public Msg getPageClassByKeyWord(Integer currentPage , String keyword){
-        currentPage = 1;
-        keyword = "圾";
-        return classService.getPageClassByKeyWord(currentPage,keyword);
+        List<MyClass> pageClassByKeyWord = classService.getPageClassByKeyWord(currentPage, keyword);
+        return pageClassByKeyWord == null ? new Msg().fail() : new Msg().success().add("result",pageClassByKeyWord);
     }
 }

@@ -2,7 +2,12 @@ package com.hubu.pojo;
 
 import com.hubu.dto.UserDTO;
 
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
+
 public class User {
+    @Size(message = "")
     private String account;
     private String realName;
     private String password;

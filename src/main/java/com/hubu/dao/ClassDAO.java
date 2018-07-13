@@ -1,16 +1,15 @@
 package com.hubu.dao;
 
-import com.hubu.pojo.Msg;
 import com.hubu.pojo.MyClass;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 @Mapper
 public interface ClassDAO {
     String TABLE_NAME = " classinfo ";
     String INSERT_FIELDS = " className ";
+    String SELECT_FIELDS = " classId,className ";
 
     @Insert("insert into" + TABLE_NAME + "(" + INSERT_FIELDS + ") values(#{className})")
     int insertClass(MyClass myClass);
@@ -20,4 +19,18 @@ public interface ClassDAO {
 
     @Delete("delete from" + TABLE_NAME + "where classId=#{classId}")
     int deleteClass(int classId);
+
+    @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME,"limit #{currentPage},#{pageCount}"})
+    @Results({
+            @Result(id = true,property = "classId",column = "classId"),
+            @Result(property = "className",column = "className")
+    })
+    List<MyClass> selectPageClass(@Param("currentPage") int currentPage,@Param("pageCount") Integer pageCount);
+
+    @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME + "where className like '%${keyWord}%'","limit #{currentPage},#{pageCount}"})
+    @Results({
+            @Result(id = true,property = "classId",column = "classId"),
+            @Result(property = "className",column = "className")
+    })
+    List<MyClass> selectPageClassByKeyWord(@Param("currentPage") int currentPage,@Param("pageCount") Integer pageCount,@Param("keyWord") String keyWord);
 }

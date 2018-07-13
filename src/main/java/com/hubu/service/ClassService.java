@@ -3,8 +3,11 @@ package com.hubu.service;
 import com.hubu.dao.ClassDAO;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.MyClass;
+import com.hubu.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ClassService {
@@ -12,31 +15,47 @@ public class ClassService {
     ClassDAO classDAO;
     private Integer pageCount = 10;
 
-    public Msg addClass(MyClass myClass) {
-        return classDAO.insertClass(myClass) == 1 ? new Msg().success() : new Msg().fail();
-    }
-
-    public Msg updateClass(MyClass myClass) {
-        return classDAO.updateClass(myClass) == 1 ? new Msg().success() : new Msg().fail();
-    }
-
-    public Msg deleteClass(int classId) {
-        return classDAO.deleteClass(classId) == 1 ? new Msg().success() : new Msg().fail();
-    }
-
-    public Msg getPageClass(Integer currentPage) {
+    public Integer addClass(MyClass myClass) {
         try {
-            return new Msg().success().add("result",classDAO.selectPageClass((currentPage-1)*pageCount,pageCount));
+            return classDAO.insertClass(myClass);
         }catch (Exception e){
-            return new Msg().fail();
+            e.printStackTrace();
+            return -1;
         }
     }
 
-    public Msg getPageClassByKeyWord(Integer currentPage, String keyword) {
-//        try {
-            return new Msg().success().add("result",classDAO.selectPageClassByKeyWord((currentPage-1)*pageCount,pageCount,keyword));
-//        }catch (Exception e){
-//            return new Msg().fail();
-//        }
+    public Integer updateClass(MyClass myClass) {
+        try {
+            return classDAO.updateClass(myClass);
+        }catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public Integer deleteClass(int classId) {
+        try {
+            return classDAO.deleteClass(classId);
+        }catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public List<MyClass> getPageClass(Integer currentPage) {
+        try {
+            return classDAO.selectPageClass((currentPage-1)*pageCount,pageCount);
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    public List<MyClass> getPageClassByKeyWord(Integer currentPage, String keyword) {
+        try {
+            return classDAO.selectPageClassByKeyWord((currentPage-1)*pageCount,pageCount,keyword);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

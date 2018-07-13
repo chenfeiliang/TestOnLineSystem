@@ -4,12 +4,16 @@ import com.hubu.pojo.Lesson;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.Question;
 import com.hubu.service.QuestionService;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.security.krb5.internal.PAData;
+
+import java.util.List;
 
 /*
  * 作者：陈飞良
@@ -24,24 +28,10 @@ public class QuestionController {
      * 操作：存储题目信息
      * 输出：操作结果
      * */
-    @RequestMapping(path = "/addQuestion",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(path = "/addQuestion",method = {RequestMethod.POST})
     @ResponseBody
     public Msg addQuestion( Question question){
-        question.setTitle("Title");
-        question.setOptionA("OptionA");
-        question.setOptionB("OptionB");
-        question.setOptionC("OptionC");
-        question.setOptionD("OptionD");
-        question.setCreator("Creator");
-        question.setQuestionKey("Key");
-        question.setQuestionLevel(1);
-        question.setLessonId(2);
-        Lesson lesson = new Lesson();
-        lesson.setLessonId(2);
-        lesson.setLessonName("java");
-        question.setLesson(lesson);
-
-        return questionService.addQuestion(question);
+        return questionService.addQuestion(question) == 1 ? new Msg().success() : new Msg().fail();
     }
 
     /*
@@ -49,8 +39,10 @@ public class QuestionController {
      * 操作：删除题目信息
      * 输出：操作结果
      * */
-    public Msg deleteQuestion(){
-        return  new Msg().success().add("","");
+    @RequestMapping(path = "/deleteQuestion",method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public Msg deleteQuestion(Integer questionId){
+        return questionService.deleteQuestion(questionId) == 1 ? new Msg().success() : new Msg().fail();
     }
 
     /*
@@ -58,8 +50,10 @@ public class QuestionController {
      * 操作：更新题目信息
      * 输出：操作结果
      * */
-    public Msg updateQuestion(){
-        return  new Msg().success().add("","");
+    @RequestMapping(path = "/updateQuestion",method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public Msg updateQuestion(Question question){
+        return questionService.updateQuestion(question) == 1 ? new Msg().success() : new Msg().fail();
     }
 
     /*
@@ -67,8 +61,9 @@ public class QuestionController {
      * 操作：分页查询题目信息
      * 输出：题目列表
      * */
-    public Msg getPageQuestion(int cp){
-        return  new Msg().success().add("","");
+    public Msg getPageQuestion(Integer currentPage){
+        List<Question> pageQuestion = questionService.getPageQuestion(currentPage);
+        return pageQuestion == null ? new Msg().fail() : new Msg().success().add("result",pageQuestion);
     }
 
     /*
@@ -76,8 +71,11 @@ public class QuestionController {
      * 操作：通过关键词分页查询题目信息
      * 输出：题目列表
      * */
-    public Msg getPageQuestionByKeyWord(int cp , String keyword){
-        return  new Msg().success().add("","");
+    @RequestMapping(path = "/getPageQuestionByKeyWord ",method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public Msg getPageQuestionByKeyWord(Integer currentPage , String keyword){
+        List<Question> pageQuestion = questionService.getPageQuestion(currentPage);
+        return pageQuestion == null ? new Msg().fail() : new Msg().success().add("result",pageQuestion);
     }
 
 }

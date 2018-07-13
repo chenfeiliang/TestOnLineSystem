@@ -15,34 +15,52 @@ public class UserService {
     UserDAO userDAO;
     private int pageCount = 10;
 
-    public Msg addUser(UserDTO user) {
-        return userDAO.addUser(new User(user)) == 1 ? new Msg().success() : new Msg().fail();
-    }
-
-    public Msg deleteUser(String account) {
-        return userDAO.deleteUser(account) == 1 ? new Msg().success() : new Msg().fail();
-    }
-
-    public Msg updateUser(User user) {
-        return userDAO.updateUser(user) == 1 ? new Msg().success() : new Msg().fail();
-    }
-
-    public Msg findPageUser(int currentPage) {
+    public Integer addUser(UserDTO user) {
         try {
-            return new Msg().success().add("result",userDAO.selectPageUser ((currentPage-1)*pageCount,pageCount));
+            return userDAO.addUser(new User(user));
         }catch (Exception e){
             e.printStackTrace();
-            return new Msg().fail();
+            return -1;
+        }
+    }
+
+    public Integer deleteUser(String account) {
+        try {
+            return userDAO.deleteUser(account);
+        }catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }
+
+    }
+
+    public Integer updateUser(User user) {
+
+        try {
+            return userDAO.updateUser(user);
+        }catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public List<User> findPageUser(int currentPage) {
+        try {
+            return userDAO.selectPageUser ((currentPage-1)*pageCount,pageCount);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
 
 
     }
 
-    public Msg getPageUserByKeyWord(int currentPage, String keyword) {
+    public List<User> getPageUserByKeyWord(int currentPage, String keyword) {
         try {
-            return new Msg().success().add("result",userDAO.selectPageUserByKeyWord((currentPage-1)*pageCount,pageCount,keyword));
-        }catch (OutOfMemoryError e){
-            return new Msg().fail();
+            return userDAO.selectPageUserByKeyWord((currentPage-1)*pageCount,pageCount,keyword);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
 
     }
