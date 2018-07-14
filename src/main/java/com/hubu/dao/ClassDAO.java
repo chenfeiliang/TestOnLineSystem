@@ -20,14 +20,14 @@ public interface ClassDAO {
     @Update("update" + TABLE_NAME + "set className=#{className} where classId = #{classId}")
     int updateClass(MyClass myClass);
 
-    @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME,"limit #{currentPage},#{pageCount}"})
+    @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME," order by classId desc limit #{currentPage},#{pageCount}"})
     @Results({
             @Result(id = true,property = "classId",column = "classId"),
             @Result(property = "className",column = "className")
     })
     List<MyClass> selectPageClass(@Param("currentPage") int currentPage,@Param("pageCount") Integer pageCount);
 
-    @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME + "where className like '%${keyWord}%'","limit #{currentPage},#{pageCount}"})
+    @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME + "where className like '%${keyWord}%'"," order by classId desc limit #{currentPage},#{pageCount}"})
     @Results({
             @Result(id = true,property = "classId",column = "classId"),
             @Result(property = "className",column = "className")
@@ -40,6 +40,7 @@ public interface ClassDAO {
             @Result(property = "className",column = "className")
     })
     MyClass selectClassById(Integer classId);
+
     @Delete({"delete from",TABLE_NAME,"where classId in (${classIds})"})
     Integer batchDeleteClassById(@Param("classIds") String classIds);
 }

@@ -1,55 +1,93 @@
 package com.hubu.pojo;
 
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.List;
 
 public class Paper {
-    private int code;
+    private Integer paperId;
+    private String title;
+    private Integer LessonId;
+    private String questionIds;
+    private String keys;
+    private String creater;
+    private Lesson lesson;
+    private List<Question> questions;
 
-    private String msg;
-
-    private Map<String,Object> extend = new HashMap<String,Object>();
-
-    public int getCode() {
-        return code;
+    @Override
+    public String toString() {
+        return "Paper{" +
+                "paperId=" + paperId +
+                ", title='" + title + '\'' +
+                ", LessonId=" + LessonId +
+                ", questionIds='" + questionIds + '\'' +
+                ", keys='" + keys + '\'' +
+                ", creater='" + creater + '\'' +
+                ", lesson=" + lesson +
+                ", questions=" + questions +
+                '}';
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public Integer getPaperId() {
+        return paperId;
     }
 
-    public String getMsg() {
-        return msg;
+    public void setPaperId(Integer paperId) {
+        this.paperId = paperId;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public String getTitle() {
+        return title;
     }
 
-    public Map<String, Object> getExtend() {
-        return extend;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setExtend(Map<String, Object> extend) {
-        this.extend = extend;
+    public Integer getLessonId() {
+        return LessonId;
     }
 
-    public Paper success(){
-        Paper result = new Paper();
-        result.code = 100;
-        result.setMsg("处理成功！");
-        return  result;
+    public void setLessonId(Integer lessonId) {
+        LessonId = lessonId;
     }
 
-    public Paper fail(){
-        Paper result = new Paper();
-        result.code = 200;
-        result.setMsg("处理失败！");
-        return  result;
+    public String getQuestionIds() {
+        return questionIds;
     }
 
-    public Paper add(String key, Object value){
-        this.getExtend().put(key,value);
-        return this;
+    public void setQuestionIds(String questionIds) {
+        this.questionIds = questionIds;
+    }
+
+    public String getKeys() {
+        return keys;
+    }
+
+    public void setKeys(String keys) {
+        this.keys = keys;
+    }
+
+    public String getCreater() {
+        return creater;
+    }
+
+    public void setCreater(String creater) {
+        this.creater = creater;
+    }
+
+    public Lesson getLesson() {
+        return lesson;
+    }
+
+    public void setLesson(Lesson lesson) {
+        this.lesson = lesson;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 }

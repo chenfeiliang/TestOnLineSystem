@@ -39,7 +39,7 @@ public class QuestionController {
      * 操作：删除题目信息
      * 输出：操作结果
      * */
-    @RequestMapping(path = "/deleteQuestion",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(path = "/deleteQuestion",method = {RequestMethod.GET})
     @ResponseBody
     public Msg deleteQuestion(Integer questionId){
         return questionService.deleteQuestion(questionId) == 1 ? new Msg().success() : new Msg().fail();
@@ -50,7 +50,7 @@ public class QuestionController {
      * 操作：更新题目信息
      * 输出：操作结果
      * */
-    @RequestMapping(path = "/updateQuestion",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(path = "/updateQuestion",method = {RequestMethod.POST})
     @ResponseBody
     public Msg updateQuestion(Question question){
         return questionService.updateQuestion(question) == 1 ? new Msg().success() : new Msg().fail();
@@ -61,6 +61,8 @@ public class QuestionController {
      * 操作：分页查询题目信息
      * 输出：题目列表
      * */
+    @RequestMapping(path = "/getPageQuestion",method = {RequestMethod.GET})
+    @ResponseBody
     public Msg getPageQuestion(Integer currentPage){
         List<Question> pageQuestion = questionService.getPageQuestion(currentPage);
         return pageQuestion == null ? new Msg().fail() : new Msg().success().add("result",pageQuestion);
@@ -71,10 +73,10 @@ public class QuestionController {
      * 操作：通过关键词分页查询题目信息
      * 输出：题目列表
      * */
-    @RequestMapping(path = "/getPageQuestionByKeyWord ",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(path = "/getPageQuestionByKeyWord",method = {RequestMethod.GET})
     @ResponseBody
     public Msg getPageQuestionByKeyWord(Integer currentPage , String keyword){
-        List<Question> pageQuestion = questionService.getPageQuestion(currentPage);
+        List<Question> pageQuestion = questionService.getPageQuestionByKeyWord(currentPage,keyword);
         return pageQuestion == null ? new Msg().fail() : new Msg().success().add("result",pageQuestion);
     }
 

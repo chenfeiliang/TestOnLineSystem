@@ -1,7 +1,7 @@
 package com.hubu.pojo;
 
 public class Lesson {
-    private int lessonId;
+    private Integer lessonId;
     private String lessonName;
 
     @Override

@@ -17,7 +17,7 @@ public class HomeController {
      * 操作：校验信息是否符合格式，用户是否存在,合格则，添加用户信息
      * 输出：注册结果
      * */
-    @RequestMapping
+    @RequestMapping("/register")
     @ResponseBody
     public Msg register(UserDTO userDTO){
         return new Msg().success().add("hello","hello");

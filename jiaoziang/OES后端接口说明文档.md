@@ -312,6 +312,95 @@
 
 备注：×
 
+## 试题
+
+#### 添加试题
+
+接口序号：MGL_Question_001
+
+接口名称：addQuestion
+
+接口链接：/addQuestion
+
+输入：title,optionA,optionB,optionC,optionD,questionKey,questionLevel,lessonId,creator
+
+处理描述：添加试题信息
+
+输出：状态码 成功200,true/失败500,false
+
+作者：MGL
+
+备注：×
+
+#### 删除试题
+
+接口序号：MGL_Question_002
+
+接口名称：deleteQuestion
+
+接口链接：/deleteQuestion
+
+输入：questionId
+
+处理描述 删除试题信息
+
+输出：状态码 成功200,true/失败500,false
+
+作者：MGL
+
+备注：×
+
+#### 修改试题
+
+接口序号：MGL_Question_003
+
+接口名称：updateQuestion
+
+接口链接：/updateQuestion
+
+输入：title,optionA,optionB,optionC,optionD,questionKey,questionLevel,lessonId,creator，questionId
+
+处理描述：修改试题信息
+
+输出：状态码 成功200,true/失败500,false
+
+作者：MGL
+
+备注：×
+
+#### 查找一页用户
+
+接口序号：MGL_Question_004
+
+接口名称：getPageQuestion
+
+接口链接：/getPageQuestion
+
+输入：currentPage
+
+处理描述：查找一页试题的信息
+
+输出：状态码 成功200,true,List&lt;Question>/失败500,false
+
+作者：MGL
+
+备注：×
+
+#### 根据关键词查找一页试题
+
+接口序号：MGL_Question_005
+
+接口名称：getPageQuestionByKeyWord
+
+接口链接：/getPageQuestionByKeyWord
+
+输入：currentPage,keyWord
+
+处理描述：根据关键词查找一页试题的信息
+
+输出：状态码 成功200,true,List&lt;Question/失败500,false
+
+作者：MGL
 
 
 

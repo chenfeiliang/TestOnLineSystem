@@ -12,9 +12,13 @@ import java.util.List;
 public class QuestionService {
     @Autowired
     QuestionDAO questionDAO;
+
+    private int pageCount = 10;
+
     public Integer addQuestion(Question question) {
         try {
-            return questionDAO.insertQuestion(question);
+            Integer integer = questionDAO.insertQuestion(question);
+            return integer;
         }catch (Exception e){
             e.printStackTrace();
             return -1;
@@ -39,10 +43,20 @@ public class QuestionService {
         }
     }
 
-    public List<Question> getPageQuestion(Integer currentPage) {
+    public List<Question> getPageQuestion(int currentPage) {
         try {
-            return questionDAO.getPageQuestion(currentPage);
+            return questionDAO.selectPageQuestion((currentPage-1)*pageCount,pageCount);
         }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Question> getPageQuestionByKeyWord(int currentPage, String keyword) {
+        try {
+            return questionDAO.selectPageQuestionByKeyWord((currentPage-1)*pageCount,pageCount,keyword);
+        }catch (Exception e){
+            e.printStackTrace();
             return null;
         }
     }

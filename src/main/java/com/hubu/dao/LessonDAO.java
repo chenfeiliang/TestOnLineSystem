@@ -16,7 +16,7 @@ public interface LessonDAO {
             @Result(id = true,property = "lessonId",column = "lessonId"),
             @Result(property = "lessonName",column = "lessonName")
     })
-    String selectLessonIdByName(Integer lessonId);
+    Lesson selectLessonIdByName(@Param("lessonId") Integer lessonId);
 
     @Insert({"insert into",TABLE_NAME,"(",INSERT_FIELDS,") values(#{lessonName})"})
     Integer addLesson(Lesson lesson);
@@ -27,14 +27,14 @@ public interface LessonDAO {
     @Update("update" + TABLE_NAME + "set lessonName=#{lessonName} where lessonId = #{lessonId}")
     int updateLesson(Lesson lesson);
 
-    @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME,"limit #{currentPage},#{pageCount}"})
+    @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME," order by lessonId desc limit #{currentPage},#{pageCount}"})
     @Results({
             @Result(id = true,property = "lessonId",column = "lessonId"),
             @Result(property = "lessonName",column = "lessonName")
     })
     List<Lesson> selectPageLesson(@Param("currentPage") int currentPage, @Param("pageCount") Integer pageCount);
 
-    @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME + "where lessonName like '%${keyWord}%'","limit #{currentPage},#{pageCount}"})
+    @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME + "where lessonName like '%${keyWord}%'"," order by lessonId desc limit #{currentPage},#{pageCount}"})
     @Results({
             @Result(id = true,property = "lessonId",column = "lessonId"),
             @Result(property = "lessonName",column = "lessonName")

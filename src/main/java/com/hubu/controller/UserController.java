@@ -33,7 +33,7 @@ public class UserController {
      * 操作：删除用户信息
      * 输出：操作结果
      * */
-    @RequestMapping(path = "/deleteUser",method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(path = "/deleteUser",method = {RequestMethod.GET})
     @ResponseBody
     public Msg deleteUser(String account){
         return userService.deleteUser(account) == 1 ? new Msg().success() : new Msg().fail();
@@ -44,7 +44,7 @@ public class UserController {
      * 操作：更新用户信息
      * 输出：操作结果
      * */
-    @RequestMapping(path = "/updateUser",method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(path = "/updateUser",method = {RequestMethod.POST})
     @ResponseBody
     public Msg updateUser(User user){
         return userService.updateUser(user) == 1 ? new Msg().success() : new Msg().fail();
@@ -55,7 +55,7 @@ public class UserController {
      * 操作：分页查询用户信息
      * 输出：用户列表
      * */
-    @RequestMapping(path = "/getPageUser",method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(path = "/getPageUser",method = {RequestMethod.GET})
     @ResponseBody
     public Msg getPageUser(Integer currentPage){
         List<User> pageUser = userService.findPageUser(currentPage);
@@ -68,7 +68,7 @@ public class UserController {
      * 操作：通过关键词分页查询用户信息
      * 输出：用户列表
      * */
-    @RequestMapping("/getPageUserByKeyWord")
+    @RequestMapping(value = "/getPageUserByKeyWord",method = {RequestMethod.GET})
     @ResponseBody
     public Msg getPageUserByKeyWord(int currentPage,String keyword){
         List<User> pageUser = userService.getPageUserByKeyWord(currentPage,keyword);
