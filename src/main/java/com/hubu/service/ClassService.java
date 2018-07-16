@@ -1,14 +1,21 @@
 package com.hubu.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hubu.dao.ClassDAO;
+import com.hubu.dao.PageCountDAO;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.MyClass;
 import com.hubu.pojo.User;
+import com.hubu.utils.Myutils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ClassService {
@@ -43,17 +50,30 @@ public class ClassService {
         }
     }
 
-    public List<MyClass> getPageClass(Integer currentPage) {
+    public PageInfo<MyClass> getPageClass(Integer currentPage) {
         try {
-            return classDAO.selectPageClass((currentPage-1)*pageCount,pageCount);
+            PageHelper.startPage(currentPage, 10);
+            List<MyClass> myClasses = classDAO.selectClass();
+            PageInfo<MyClass> pageClasses = new PageInfo<>(myClasses);
+            int[] nums = pageClasses.getNavigatepageNums();
+            int[] result = Myutils.pageCount(currentPage, nums);
+            pageClasses.setNavigatepageNums(result);
+            return pageClasses;
         }catch (Exception e){
+            e.printStackTrace();
             return null;
         }
     }
 
-    public List<MyClass> getPageClassByKeyWord(Integer currentPage, String keyword) {
+    public PageInfo<MyClass> getPageClassByKeyWord(Integer currentPage, String keyword) {
         try {
-            return classDAO.selectPageClassByKeyWord((currentPage-1)*pageCount,pageCount,keyword);
+            PageHelper.startPage(currentPage, 10);
+            List<MyClass> myClasses = classDAO.selectClassByKeyWord(keyword);
+            PageInfo<MyClass> pageClasses = new PageInfo<>(myClasses);
+            int[] nums = pageClasses.getNavigatepageNums();
+            int[] result = Myutils.pageCount(currentPage, nums);
+            pageClasses.setNavigatepageNums(result);
+            return pageClasses;
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -77,4 +97,5 @@ public class ClassService {
             return -1;
         }
     }
+
 }

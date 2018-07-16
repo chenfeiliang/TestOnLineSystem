@@ -8,7 +8,8 @@ public class ExamController {
 
      * 操作：手动选择试卷，班级，时间，生成一场考试，并添加到表
      * 输出：操作结果
-    public Msg createExam(){
-     }
-     * */new Msg().success();
+     *
+     * */
+//    public Msg createExam(){
+//    }
 }

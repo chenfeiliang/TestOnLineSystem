@@ -1,8 +1,10 @@
 package com.hubu.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.MyClass;
 import com.hubu.service.ClassService;
+import com.hubu.service.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,8 @@ import java.util.List;
 public class ClassController {
     @Autowired
     ClassService classService;
+    @Autowired
+    PageService pageService;
     /*
      * 输入：班级信息
      * 操作：存储班级信息
@@ -78,9 +82,7 @@ public class ClassController {
                             HttpServletResponse response,
                             HttpServletRequest request
     ){
-//        String origin = request.getHeader("Origin");
-//        response.setHeader("Access-Control-Allow-Origin","http://120.79.59.117".equals(origin) ? origin : "");
-        List<MyClass> pageClass = classService.getPageClass(currentPage);
+        PageInfo<MyClass> pageClass = classService.getPageClass(currentPage);
         return pageClass == null ? new Msg().fail() : new Msg().success().add("result",pageClass);
     }
 
@@ -99,10 +101,8 @@ public class ClassController {
                                      HttpServletResponse response,
                                      HttpServletRequest request
     ){
-//        String origin = request.getHeader("Origin");
-//        response.setHeader("Access-Control-Allow-Origin","http://120.79.59.117".equals(origin) ? origin : "");
-        List<MyClass> pageClassByKeyWord = classService.getPageClassByKeyWord(currentPage, keyword);
-        return pageClassByKeyWord == null ? new Msg().fail() : new Msg().success().add("result",pageClassByKeyWord);
+        PageInfo<MyClass> pageClass = classService.getPageClassByKeyWord(currentPage,keyword);
+        return pageClass == null ? new Msg().fail() : new Msg().success().add("result",pageClass);
     }
 
     @RequestMapping(path = "/getClassByClassId",method = {RequestMethod.GET})

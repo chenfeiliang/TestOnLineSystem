@@ -20,19 +20,22 @@ public interface ClassDAO {
     @Update("update" + TABLE_NAME + "set className=#{className} where classId = #{classId}")
     int updateClass(MyClass myClass);
 
-    @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME," order by classId desc limit #{currentPage},#{pageCount}"})
-    @Results({
-            @Result(id = true,property = "classId",column = "classId"),
-            @Result(property = "className",column = "className")
-    })
-    List<MyClass> selectPageClass(@Param("currentPage") int currentPage,@Param("pageCount") Integer pageCount);
+//    @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME," order by classId desc limit #{currentPage},#{pageCount}"})
+//    @Results({
+//            @Result(id = true,property = "classId",column = "classId"),
+//            @Result(property = "className",column = "className")
+//    })
+//    List<MyClass> selectPageClass(@Param("currentPage") int currentPage,@Param("pageCount") Integer pageCount);
 
-    @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME + "where className like '%${keyWord}%'"," order by classId desc limit #{currentPage},#{pageCount}"})
-    @Results({
-            @Result(id = true,property = "classId",column = "classId"),
-            @Result(property = "className",column = "className")
-    })
-    List<MyClass> selectPageClassByKeyWord(@Param("currentPage") int currentPage,@Param("pageCount") Integer pageCount,@Param("keyWord") String keyWord);
+
+
+
+//    @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME + "where className like '%${keyWord}%'"," order by classId desc limit #{currentPage},#{pageCount}"})
+//    @Results({
+//            @Result(id = true,property = "classId",column = "classId"),
+//            @Result(property = "className",column = "className")
+//    })
+//    List<MyClass> selectPageClassByKeyWord(@Param("currentPage") int currentPage,@Param("pageCount") Integer pageCount,@Param("keyWord") String keyWord);
 
     @Select({"select ",SELECT_FIELDS,"from",TABLE_NAME,"where ClassId = #{classId}"})
     @Results({
@@ -43,4 +46,19 @@ public interface ClassDAO {
 
     @Delete({"delete from",TABLE_NAME,"where classId in (${classIds})"})
     Integer batchDeleteClassById(@Param("classIds") String classIds);
+
+
+    @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME + " order by classId desc"})
+    @Results({
+            @Result(id = true,property = "classId",column = "classId"),
+            @Result(property = "className",column = "className")
+    })
+    List<MyClass> selectClass();
+
+    @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME + "where className like '%${keyword}%' order by classId desc "})
+    @Results({
+            @Result(id = true,property = "classId",column = "classId"),
+            @Result(property = "className",column = "className")
+    })
+    List<MyClass> selectClassByKeyWord(@Param("keyword") String keyword);
 }
