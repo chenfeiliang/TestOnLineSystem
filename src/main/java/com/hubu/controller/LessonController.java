@@ -1,5 +1,6 @@
 package com.hubu.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hubu.pojo.Lesson;
 import com.hubu.pojo.Msg;
 import com.hubu.service.LessonService;
@@ -40,28 +41,14 @@ public class LessonController {
     @RequestMapping(value = "/getPageLesson",method = {RequestMethod.GET})
     @ResponseBody
     public Msg getPageLesson(Integer currentPage){
-        Msg msg = new Msg();
-/*        List<Lesson> pageLesson = lessonService.getPageLesson(currentPage);
-        Integer pageCount = pageService.getPageCount("lesson",null);
-        if (pageLesson == null || pageCount == -1)
-            return msg.fail();
-        msg = msg.success();
-        msg.add("result",pageLesson);
-        msg.add("pageCount",pageCount);*/
-        return msg;
+        PageInfo<Lesson> pageLesson = lessonService.getPageLesson(currentPage);
+        return pageLesson == null ? new Msg().fail() : new Msg().success().add("result",pageLesson);
     }
 
-        @RequestMapping(value = "/getPageLessonByKeyWord",method = {RequestMethod.GET})
+    @RequestMapping(value = "/getPageLessonByKeyWord",method = {RequestMethod.GET})
     @ResponseBody
     public Msg getPageLessonByKeyWord (Integer currentPage,String keyword){
-        Msg msg = new Msg();
-/*        List<Lesson> pageClass = lessonService.getPageLessonByKeyWord(currentPage, keyword);
-        Integer pageCount = pageService.getPageCount("lesson",keyword);
-        if (pageClass == null || pageCount == -1)
-            return msg.fail();
-        msg = msg.success();
-        msg.add("result",pageClass);
-        msg.add("pageCount",pageCount);*/
-        return msg;
+        PageInfo<Lesson> pageLesson = lessonService.getPageLessonByKeyWord(currentPage,keyword);
+        return pageLesson == null ? new Msg().fail() : new Msg().success().add("result",pageLesson);
     }
 }
