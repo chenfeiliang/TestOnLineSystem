@@ -8,10 +8,11 @@ public class Question {
     private String optionC;
     private String optionD;
     private String questionKey;
-    private int questionLevel;
+    private String questionLevel;
     private int lessonId;
     private String creator;
     private Lesson lesson;
+
 
     @Override
     public String toString() {
@@ -23,12 +24,13 @@ public class Question {
                 ", optionC='" + optionC + '\'' +
                 ", optionD='" + optionD + '\'' +
                 ", questionKey='" + questionKey + '\'' +
-                ", questionLevel=" + questionLevel +
+                ", questionLevel='" + questionLevel + '\'' +
                 ", lessonId=" + lessonId +
                 ", creator='" + creator + '\'' +
                 ", lesson=" + lesson +
                 '}';
     }
+
 
     public int getQuestionId() {
         return questionId;
@@ -86,11 +88,11 @@ public class Question {
         this.questionKey = questionKey;
     }
 
-    public int getQuestionLevel() {
+    public String getQuestionLevel() {
         return questionLevel;
     }
 
-    public void setQuestionLevel(int questionLevel) {
+    public void setQuestionLevel(String questionLevel) {
         this.questionLevel = questionLevel;
     }
 

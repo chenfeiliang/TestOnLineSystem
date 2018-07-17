@@ -1,5 +1,6 @@
 package com.hubu.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hubu.dto.UserDTO;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.User;
@@ -22,11 +23,11 @@ public class UserController {
      * 操作：存储用户信息
      * 输出：操作结果
      * */
-    @RequestMapping(path = "/addUser",method = {RequestMethod.POST})
-    @ResponseBody
-    public Msg addUser(UserDTO userDTO){
-        return userService.addUser(userDTO) == 1 ? new Msg().success() : new Msg().fail();
-    }
+//    @RequestMapping(path = "/addUser",method = {RequestMethod.POST})
+//    @ResponseBody
+//    public Msg addUser(User user){
+//        return userService.addUser(user) == 1 ? new Msg().success() : new Msg().fail();
+//    }
 
     /*
      * 输入：account
@@ -58,8 +59,8 @@ public class UserController {
     @RequestMapping(path = "/getPageUser",method = {RequestMethod.GET})
     @ResponseBody
     public Msg getPageUser(Integer currentPage){
-        List<User> pageUser = userService.findPageUser(currentPage);
-        return pageUser == null ? new Msg().fail() : new Msg().success().add("result",pageUser);
+        PageInfo<User> pageClass = userService.getPageUser(currentPage);
+        return pageClass == null ? new Msg().fail() : new Msg().success().add("result",pageClass);
 
     }
 
@@ -71,7 +72,14 @@ public class UserController {
     @RequestMapping(value = "/getPageUserByKeyWord",method = {RequestMethod.GET})
     @ResponseBody
     public Msg getPageUserByKeyWord(int currentPage,String keyword){
-        List<User> pageUser = userService.getPageUserByKeyWord(currentPage,keyword);
-        return pageUser == null ? new Msg().fail() : new Msg().success().add("result",pageUser);
+        PageInfo<User> pageClass = userService.getPageUserByKeyWord(currentPage,keyword);
+        return pageClass == null ? new Msg().fail() : new Msg().success().add("result",pageClass);
+    }
+
+    @RequestMapping(path = "/getUserByAccount",method = {RequestMethod.GET})
+    @ResponseBody
+    public Msg getUserByAccount(String account){
+        User user = userService.getUserByUserId(account);
+        return user == null ? new Msg().fail() : new Msg().success().add("result",user);
     }
 }

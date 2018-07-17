@@ -8,42 +8,59 @@ import java.util.List;
 @Mapper
 public interface PaperDao {
     String TABLE_NAME = " paper ";
-    String INSERT_FIELDS = " title,lessonId,questionIds,keys,creater ";
-    String SELECT_FIELDS = " title,lessonId,questionIds,keys,creater ";
+    String INSERT_FIELDS = " title,lessonId,questionIds,answer,creator ";
+    String SELECT_FIELDS = " paperId,title,lessonId,questionIds,answer,creator ";
 
-    @Insert({"insert into ",TABLE_NAME,"(",INSERT_FIELDS,") values title = #{title},lessonId = #{lessonId},questionIds = #{questionIds},keys = #{keys},creater = #{creater}"})
+    @Insert({"insert into ",TABLE_NAME,"(",INSERT_FIELDS,") values (#{title}, #{lessonId},#{questionIds},#{answer},#{creator})"})
     Integer insertPaperByMan(Paper paper);
 
     @Delete({"delete from",TABLE_NAME,"where paperId = #{paperId}"})
     Integer deletePaper(Integer paperId);
 
-    @Update({"update",TABLE_NAME,"set title=#{title},lessonId=#{lessonId},questionIds=#{questionIds},keys=#{keys},creater=#{creater} where paperId=#{paperId}"})
+    @Update({"update",TABLE_NAME,"set title=#{title},lessonId=#{lessonId},questionIds=#{questionIds},answer=#{answer},creator=#{creator} where paperId=#{paperId}"})
     Integer updatePaper(Paper paper);
 
-    @Select({"select",SELECT_FIELDS,"from",TABLE_NAME," order by paperId desc limit #{currentPage},#{pageCount}"})
+    @Select({"select",SELECT_FIELDS,"from",TABLE_NAME," order by paperId desc "})
     @Results({
-            @Result(id = true,column = "paperId",property = "paperID"),
+            @Result(id = true,column = "paperId",property = "paperId"),
             @Result(column = "title",property = "title"),
             @Result(column = "lessonId",property = "lesson",
                     one = @One(select = "com.hubu.dao.LessonDAO.selectLessonIdByName")
             ),
             @Result(column = "questionIds",property = "questionIds"),
-            @Result(column = "keys",property = "keys"),
-            @Result(column = "creater",property = "creater")
+            @Result(column = "answer",property = "answer"),
+            @Result(column = "creator",property = "creator")
     })
-    List<Paper> selectPagePaper(int currentPage, int pageCount);
+    List<Paper> selectPagePaper();
 
-    @Select({"select",SELECT_FIELDS,"from",TABLE_NAME," where title like %${keyword}% order by paperId desc limit #{currentPage},#{pageCount}"})
+    @Select({"select",SELECT_FIELDS,"from",TABLE_NAME," where title like '%${keyword}%' order by paperId desc"})
     @Results({
-            @Result(id = true,column = "paperId",property = "paperID"),
+            @Result(id = true,column = "paperId",property = "paperId"),
             @Result(column = "title",property = "title"),
             @Result(column = "lessonId",property = "lesson",
                     one = @One(select = "com.hubu.dao.LessonDAO.selectLessonIdByName")
             ),
             @Result(column = "questionIds",property = "questionIds"),
-            @Result(column = "keys",property = "keys"),
-            @Result(column = "creater",property = "creater")
+            @Result(column = "answer",property = "answer"),
+            @Result(column = "creator",property = "creator")
     })
-    List<Paper> selectPagePaperByKeyWord(int currentPage, int pageCount, String keyword);
+    List<Paper> selectPagePaperByKeyWord(@Param("keyword") String keyword);
+
+
+    @Select({"select",SELECT_FIELDS,"from",TABLE_NAME,"where paperId = #{paperId}"})
+    @Results({
+            @Result(id = true,column = "paperId",property = "paperId"),
+            @Result(column = "title",property = "title"),
+            @Result(column = "lessonId",property = "lesson",
+                    one = @One(select = "com.hubu.dao.LessonDAO.selectLessonIdByName")
+            ),
+            @Result(column = "questionIds",property = "questionIds"),
+            @Result(column = "answer",property = "answer"),
+            @Result(column = "creator",property = "creator")
+    })
+    Paper selectPaperById(Integer paperId);
+
+    @Delete({"delete from",TABLE_NAME,"where paperId in (${paperIds})"})
+    Integer batchDeletePaperById(@Param("paperIds") String paperIds);
 }
 

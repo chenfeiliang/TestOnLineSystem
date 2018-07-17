@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hubu.dao.LessonDAO;
 import com.hubu.pojo.Lesson;
+import com.hubu.pojo.Msg;
 import com.hubu.utils.Myutils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,6 +70,24 @@ public class LessonService {
         }catch (Exception e){
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public Lesson getLessonByLessonId(Integer lessonId) {
+        try {
+            return lessonDAO.selectLessonIdByName(lessonId);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Integer batchDeleteLessonById(String lessonIds) {
+        try {
+            return lessonDAO.batchDeleteLessonById(lessonIds);
+        }catch (Exception e){
+            e.printStackTrace();
+            return -1;
         }
     }
 }

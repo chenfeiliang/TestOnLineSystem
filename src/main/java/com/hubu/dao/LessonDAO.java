@@ -54,5 +54,8 @@ public interface LessonDAO {
             @Result(property = "lessonName",column = "lessonName")
     })
     List<Lesson> selectLessonByKeyWord(@Param("keyword") String keyword);
+
+    @Delete({"delete from",TABLE_NAME,"where lessonId in (${lessonIds})"})
+    Integer batchDeleteLessonById(@Param("lessonIds") String lessonIds);
 }
 

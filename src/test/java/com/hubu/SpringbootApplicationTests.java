@@ -1,9 +1,6 @@
 package com.hubu;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.hubu.dao.ClassDAO;
-import com.hubu.pojo.MyClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +9,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
@@ -41,5 +37,6 @@ public class SpringbootApplicationTests {
 			result[i] = currentPage + num++;
 		}
 		System.out.println(Arrays.toString(result));
+
 	}
 }

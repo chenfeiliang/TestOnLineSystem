@@ -1,5 +1,6 @@
 package com.hubu.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hubu.pojo.Lesson;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.Question;
@@ -44,7 +45,6 @@ public class QuestionController {
     public Msg deleteQuestion(Integer questionId){
         return questionService.deleteQuestion(questionId) == 1 ? new Msg().success() : new Msg().fail();
     }
-
     /*
      * 输入：题目信息
      * 操作：更新题目信息
@@ -64,8 +64,8 @@ public class QuestionController {
     @RequestMapping(path = "/getPageQuestion",method = {RequestMethod.GET})
     @ResponseBody
     public Msg getPageQuestion(Integer currentPage){
-        List<Question> pageQuestion = questionService.getPageQuestion(currentPage);
-        return pageQuestion == null ? new Msg().fail() : new Msg().success().add("result",pageQuestion);
+        PageInfo<Question> pageClass = questionService.getPageQuestion(currentPage);
+        return pageClass == null ? new Msg().fail() : new Msg().success().add("result",pageClass);
     }
 
     /*
@@ -76,8 +76,20 @@ public class QuestionController {
     @RequestMapping(path = "/getPageQuestionByKeyWord",method = {RequestMethod.GET})
     @ResponseBody
     public Msg getPageQuestionByKeyWord(Integer currentPage , String keyword){
-        List<Question> pageQuestion = questionService.getPageQuestionByKeyWord(currentPage,keyword);
-        return pageQuestion == null ? new Msg().fail() : new Msg().success().add("result",pageQuestion);
+        PageInfo<Question> pageClass = questionService.getPageQuestionByKeyWord(currentPage,keyword);
+        return pageClass == null ? new Msg().fail() : new Msg().success().add("result",pageClass);
     }
 
+    @RequestMapping(path = "/getQuestionByQuestionId",method = {RequestMethod.GET})
+    @ResponseBody
+    public Msg getQuestionByQuestionId(Integer questionId){
+        Question question = questionService.getQuestionByQuestionId(questionId);
+        return question == null ? new Msg().fail() : new Msg().success().add("result",question);
+    }
+
+    @RequestMapping(path = "/batchDeleteQuestionById",method = RequestMethod.GET)
+    @ResponseBody
+    public Msg batchDeleteQuestionById(String questionIds){
+        return questionService.batchDeleteQuestionById(questionIds) > 0 ? new Msg().success() : new Msg().fail();
+    }
 }

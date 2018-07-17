@@ -112,11 +112,10 @@ public class ClassController {
                                 HttpServletResponse response,
                                 HttpServletRequest request
     ){
-//        String origin = request.getHeader("Origin");
-//        response.setHeader("Access-Control-Allow-Origin","http://120.79.59.117".equals(origin) ? origin : "");
         MyClass myClass = classService.getClassByClassId(classId);
         return myClass == null ? new Msg().fail() : new Msg().success().add("result",myClass);
     }
+
     @RequestMapping(path = "/batchDeleteClassById",method = RequestMethod.GET)
     @ResponseBody
     public Msg batchDeleteClassById(
@@ -124,8 +123,6 @@ public class ClassController {
                                     HttpServletResponse response,
                                     HttpServletRequest request
     ){
-//        String origin = request.getHeader("Origin");
-//        response.setHeader("Access-Control-Allow-Origin","http://120.79.59.117".equals(origin) ? origin : "");
         return classService.batchDeleteClassById(classIds) > 0 ? new Msg().success() : new Msg().fail();
     }
 }

@@ -1,8 +1,11 @@
 package com.hubu.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hubu.dao.QuestionDAO;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.Question;
+import com.hubu.utils.Myutils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,21 +46,46 @@ public class QuestionService {
         }
     }
 
-    public List<Question> getPageQuestion(int currentPage) {
+    public PageInfo<Question> getPageQuestion(int currentPage) {
         try {
-            return questionDAO.selectPageQuestion((currentPage-1)*pageCount,pageCount);
+            PageHelper.startPage(currentPage, 10);
+            List<Question> myQuestions = questionDAO.selectQuestion();
+            PageInfo<Question> pageQuestion = new PageInfo<>(myQuestions);
+            int[] nums = pageQuestion.getNavigatepageNums();
+            int[] result = Myutils.pageCount(currentPage, nums);
+            pageQuestion.setNavigatepageNums(result);
+            return pageQuestion;
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
     }
 
-    public List<Question> getPageQuestionByKeyWord(int currentPage, String keyword) {
+    public PageInfo<Question> getPageQuestionByKeyWord(int currentPage, String keyword) {
         try {
-            return questionDAO.selectPageQuestionByKeyWord((currentPage-1)*pageCount,pageCount,keyword);
+            PageHelper.startPage(currentPage, 10);
+            List<Question> myQuestions = questionDAO.selectQuestionByKeyWord(keyword);
+            PageInfo<Question> pageQuestion = new PageInfo<>(myQuestions);
+            int[] nums = pageQuestion.getNavigatepageNums();
+            int[] result = Myutils.pageCount(currentPage, nums);
+            pageQuestion.setNavigatepageNums(result);
+            return pageQuestion;
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
+    }
+
+    public Question getQuestionByQuestionId(Integer questionId) {
+        try {
+            return questionDAO.selectQuestionIdByName(questionId);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Integer batchDeleteQuestionById(String questionIds) {
+        return questionDAO.batchDeleteQuestionById(questionIds);
     }
 }

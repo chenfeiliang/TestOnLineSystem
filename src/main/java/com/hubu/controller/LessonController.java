@@ -51,4 +51,17 @@ public class LessonController {
         PageInfo<Lesson> pageLesson = lessonService.getPageLessonByKeyWord(currentPage,keyword);
         return pageLesson == null ? new Msg().fail() : new Msg().success().add("result",pageLesson);
     }
+
+    @RequestMapping(path = "/getLessonByLessonId",method = {RequestMethod.GET})
+    @ResponseBody
+    public Msg getLessonByLessonId(Integer lessonId){
+        Lesson lesson = lessonService.getLessonByLessonId(lessonId);
+        return lesson == null ? new Msg().fail() : new Msg().success().add("result",lesson);
+    }
+
+    @RequestMapping(path = "/batchDeleteLessonById",method = RequestMethod.GET)
+    @ResponseBody
+    public Msg batchDeleteLessonById( String lessonIds){
+        return lessonService.batchDeleteLessonById(lessonIds) > 0 ? new Msg().success() : new Msg().fail();
+    }
 }
