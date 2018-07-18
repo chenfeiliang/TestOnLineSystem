@@ -1,8 +1,11 @@
 package com.hubu.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hubu.dao.LessonDAO;
 import com.hubu.pojo.Lesson;
 import com.hubu.pojo.Msg;
+import com.hubu.utils.Myutils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,21 +43,51 @@ public class LessonService {
         }
     }
 
-    public List<Lesson> getPageLesson(int currentPage) {
+    public PageInfo<Lesson> getPageLesson(int currentPage) {
         try {
-            return lessonDAO.selectPageLesson((currentPage-1)*pageCount,pageCount);
+            PageHelper.startPage(currentPage, 10);
+            List<Lesson> lessons = lessonDAO.selectLesson();
+            PageInfo<Lesson> pageLesson = new PageInfo<>(lessons);
+            int[] nums = pageLesson.getNavigatepageNums();
+            int[] result = Myutils.pageCount(currentPage, nums);
+            pageLesson.setNavigatepageNums(result);
+            return pageLesson;
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
     }
 
-    public List<Lesson> getPageLessonByKeyWord(int currentPage, String keyWord) {
+    public PageInfo<Lesson> getPageLessonByKeyWord(int currentPage, String keyword) {
         try {
-            return lessonDAO.selectPageLessonByKeyWord((currentPage-1)*pageCount,pageCount,keyWord);
+            PageHelper.startPage(currentPage, 10);
+            List<Lesson> lessons = lessonDAO.selectLessonByKeyWord(keyword);
+            PageInfo<Lesson> pageLesson = new PageInfo<>(lessons);
+            int[] nums = pageLesson.getNavigatepageNums();
+            int[] result = Myutils.pageCount(currentPage, nums);
+            pageLesson.setNavigatepageNums(result);
+            return pageLesson;
         }catch (Exception e){
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public Lesson getLessonByLessonId(Integer lessonId) {
+        try {
+            return lessonDAO.selectLessonIdByName(lessonId);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Integer batchDeleteLessonById(String lessonIds) {
+        try {
+            return lessonDAO.batchDeleteLessonById(lessonIds);
+        }catch (Exception e){
+            e.printStackTrace();
+            return -1;
         }
     }
 }

@@ -14,8 +14,22 @@ public class User {
     private int classId;
     private String mobile;
     private String image;
+    private String salt;
     private MyClass myClass;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "account='" + account + '\'' +
+                ", realName='" + realName + '\'' +
+                ", password='" + password + '\'' +
+                ", classId=" + classId +
+                ", mobile='" + mobile + '\'' +
+                ", image='" + image + '\'' +
+                ", salt='" + salt + '\'' +
+                ", myClass=" + myClass +
+                '}';
+    }
 
     public String getAccount() {
         return account;
@@ -65,6 +79,14 @@ public class User {
         this.image = image;
     }
 
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
     public MyClass getMyClass() {
         return myClass;
     }
@@ -72,30 +94,4 @@ public class User {
     public void setMyClass(MyClass myClass) {
         this.myClass = myClass;
     }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "account='" + account + '\'' +
-                ", realName='" + realName + '\'' +
-                ", password='" + password + '\'' +
-                ", classId=" + classId +
-                ", mobile='" + mobile + '\'' +
-                ", image='" + image + '\'' +
-                ", myClass=" + myClass +
-                '}';
-    }
-
-    public User(UserDTO user) {
-        account = user.getAccount();
-        realName = user.getRealName();
-        password = user.getPassword();
-        classId = user.getClassId();
-        mobile = user.getMobile();
-        image = user.getImage();
-    }
-    public User(){
-
-    }
-
 }

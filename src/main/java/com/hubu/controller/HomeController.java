@@ -4,23 +4,34 @@ package com.hubu.controller;
 import com.hubu.dto.UserDTO;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.Paper;
+import com.hubu.pojo.User;
+import com.hubu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 public class HomeController {
 
+    @Autowired
+    UserService userService;
     /*
      * 输入：用户信息
      * 操作：校验信息是否符合格式，用户是否存在,合格则，添加用户信息
      * 输出：注册结果
      * */
-    @RequestMapping("/register")
+    @RequestMapping(path = "/register",method = {RequestMethod.POST})
     @ResponseBody
-    public Msg register(UserDTO userDTO){
-        return new Msg().success().add("hello","hello");
+    public Msg register(User user){
+        Map<String, Object> map = userService.addUser(user);
+        if (map.containsKey("errMsg"))
+            return new Msg().fail().add("result",map.get("errMsg"));
+        return new Msg().success();
     }
 
     /*
@@ -28,10 +39,18 @@ public class HomeController {
     * 操作：验证账号密码，成功则使用Session存储userId,和userName
     * 输出：登录结果
     * */
-    public Msg login(String userName ,String passWord){
-        return new Msg().success();
+    @RequestMapping(path = "/login",method = {RequestMethod.POST})
+    @ResponseBody
+    public Msg login(
+            User user,
+            HttpSession session
+    ) {
+        Map<String, Object> map = userService.login(user);
+        if (map.containsKey("errMsg"))
+            return new Msg().fail().add("result",map.get("errMsg"));
+        session.setAttribute("user",map.get("user"));
+        return new Msg().success().add("result",map.get("user"));
     }
-
     /*
      * 输入：
      * 操作：使用Session中的userId，查找试卷信息

@@ -8,8 +8,8 @@ public class Paper {
     private String title;
     private Integer LessonId;
     private String questionIds;
-    private String keys;
-    private String creater;
+    private String answer;
+    private String creator;
     private Lesson lesson;
     private List<Question> questions;
 
@@ -20,8 +20,8 @@ public class Paper {
                 ", title='" + title + '\'' +
                 ", LessonId=" + LessonId +
                 ", questionIds='" + questionIds + '\'' +
-                ", keys='" + keys + '\'' +
-                ", creater='" + creater + '\'' +
+                ", answer='" + answer + '\'' +
+                ", creator='" + creator + '\'' +
                 ", lesson=" + lesson +
                 ", questions=" + questions +
                 '}';
@@ -59,20 +59,20 @@ public class Paper {
         this.questionIds = questionIds;
     }
 
-    public String getKeys() {
-        return keys;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setKeys(String keys) {
-        this.keys = keys;
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
-    public String getCreater() {
-        return creater;
+    public String getCreator() {
+        return creator;
     }
 
-    public void setCreater(String creater) {
-        this.creater = creater;
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 
     public Lesson getLesson() {

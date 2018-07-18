@@ -1,13 +1,16 @@
 package com.hubu.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hubu.dao.UserDAO;
 import com.hubu.dto.UserDTO;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.User;
+import com.hubu.utils.Myutils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -15,12 +18,23 @@ public class UserService {
     UserDAO userDAO;
     private int pageCount = 10;
 
-    public Integer addUser(UserDTO user) {
+    public Map<String,Object> addUser(User user) {
+        Map<String, Object> map = new HashMap<>();
         try {
-            return userDAO.addUser(new User(user));
+            User userResult = userDAO.selectUserByUserId(user.getAccount());
+            if (userResult != null){
+                map.put("errMsg","用户已存在");
+                return map;
+            }
+            user.setSalt(UUID.randomUUID().toString().substring(0,5));
+            user.setPassword(Myutils.MD5(user.getPassword() + user.getSalt()));
+            user.setImage(String.format("https://images.nowcoder.com/head/%dm.png", new Random().nextInt(1000)));
+            userDAO.addUser(user);
+            return map;
         }catch (Exception e){
             e.printStackTrace();
-            return -1;
+            map.put("errMsg","注册失败");
+            return map;
         }
     }
 
@@ -44,24 +58,66 @@ public class UserService {
         }
     }
 
-    public List<User> findPageUser(int currentPage) {
+    public PageInfo<User> getPageUser(int currentPage) {
         try {
-            return userDAO.selectPageUser ((currentPage-1)*pageCount,pageCount);
+            PageHelper.startPage(currentPage, 10);
+            List<User> users = userDAO.selectUser();
+            PageInfo<User> pageUser = new PageInfo<>(users);
+            int[] nums = pageUser.getNavigatepageNums();
+            int[] result = Myutils.pageCount(currentPage, nums);
+            pageUser.setNavigatepageNums(result);
+            return pageUser;
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
+    }
 
+    public PageInfo<User> getPageUserByKeyWord(int currentPage, String keyword) {
+        try {
+            PageHelper.startPage(currentPage, 10);
+            List<User> users = userDAO.selectUserByKeyWord(keyword);
+            PageInfo<User> pageUser = new PageInfo<>(users);
+            int[] nums = pageUser.getNavigatepageNums();
+            int[] result = Myutils.pageCount(currentPage, nums);
+            pageUser.setNavigatepageNums(result);
+            return pageUser;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
 
     }
 
-    public List<User> getPageUserByKeyWord(int currentPage, String keyword) {
+    public User getUserByUserId(String account) {
         try {
-            return userDAO.selectPageUserByKeyWord((currentPage-1)*pageCount,pageCount,keyword);
+            return userDAO.selectUserByUserId(account);
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
+    }
 
+    public Map<String, Object> login(User user) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            User userResult = userDAO.selectUserByUserId(user.getAccount());
+            if (userResult == null){
+                map.put("errMsg","用户名不存在");
+                return map;
+            }
+            else {
+                if (Myutils.MD5(user.getPassword() + userResult.getSalt()) == userResult.getPassword()){
+                    map.put("errMsg","密码错误");
+                    return map;
+                }
+            }
+            map.put("user",userResult);
+            return map;
+        }catch (RuntimeException e){
+            e.printStackTrace();
+            map.put("errMsg","登陆失败");
+            return map;
+        }
     }
 }
