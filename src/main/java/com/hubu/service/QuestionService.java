@@ -2,7 +2,9 @@ package com.hubu.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hubu.dao.LessonDAO;
 import com.hubu.dao.QuestionDAO;
+import com.hubu.pojo.Lesson;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.Question;
 import com.hubu.utils.Myutils;
@@ -15,6 +17,8 @@ import java.util.List;
 public class QuestionService {
     @Autowired
     QuestionDAO questionDAO;
+    @Autowired
+    LessonDAO lessonDAO;
 
     private int pageCount = 10;
 
@@ -86,6 +90,20 @@ public class QuestionService {
     }
 
     public Integer batchDeleteQuestionById(String questionIds) {
-        return questionDAO.batchDeleteQuestionById(questionIds);
+        try {
+            return questionDAO.batchDeleteQuestionById(questionIds);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Lesson> getAllLesson() {
+        try {
+            return lessonDAO.selectLesson();
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

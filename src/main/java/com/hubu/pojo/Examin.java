@@ -4,6 +4,7 @@ import com.hubu.pojo.Lesson;
 import com.hubu.pojo.Paper;
 import com.hubu.pojo.User;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class Examin {
     private Date endTime;
     private Paper paper;
     private Lesson lesson;
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
 
     @Override
     public String toString() {

@@ -39,7 +39,7 @@ public class HomeController {
     * 操作：验证账号密码，成功则使用Session存储userId,和userName
     * 输出：登录结果
     * */
-    @RequestMapping(path = "/login",method = {RequestMethod.POST})
+    @RequestMapping(path = "/login",method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public Msg login(
             User user,

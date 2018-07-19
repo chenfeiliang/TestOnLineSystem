@@ -5,6 +5,7 @@ import com.hubu.pojo.Lesson;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.Question;
 import com.hubu.service.QuestionService;
+import com.sun.org.apache.bcel.internal.generic.RET;
 import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -91,5 +92,12 @@ public class QuestionController {
     @ResponseBody
     public Msg batchDeleteQuestionById(String questionIds){
         return questionService.batchDeleteQuestionById(questionIds) > 0 ? new Msg().success() : new Msg().fail();
+    }
+
+    @RequestMapping(path = "/getAllLesson",method = {RequestMethod.GET})
+    @ResponseBody
+    public Msg getAllLesson(){
+        List<Lesson> lessons = questionService.getAllLesson();
+        return lessons == null ? new Msg().fail() : new Msg().success().add("result",lessons);
     }
 }

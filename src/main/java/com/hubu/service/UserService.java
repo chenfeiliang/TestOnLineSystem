@@ -107,7 +107,7 @@ public class UserService {
                 return map;
             }
             else {
-                if (Myutils.MD5(user.getPassword() + userResult.getSalt()) == userResult.getPassword()){
+                if ( !Myutils.MD5(user.getPassword() + userResult.getSalt()).equals(userResult.getPassword())){
                     map.put("errMsg","密码错误");
                     return map;
                 }

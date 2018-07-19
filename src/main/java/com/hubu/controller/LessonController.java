@@ -3,6 +3,7 @@ package com.hubu.controller;
 import com.github.pagehelper.PageInfo;
 import com.hubu.pojo.Lesson;
 import com.hubu.pojo.Msg;
+import com.hubu.pojo.MyClass;
 import com.hubu.service.LessonService;
 import com.hubu.service.PageService;
 import javafx.geometry.Pos;
@@ -64,4 +65,5 @@ public class LessonController {
     public Msg batchDeleteLessonById( String lessonIds){
         return lessonService.batchDeleteLessonById(lessonIds) > 0 ? new Msg().success() : new Msg().fail();
     }
+
 }

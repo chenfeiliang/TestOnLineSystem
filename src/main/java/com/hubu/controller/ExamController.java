@@ -1,12 +1,18 @@
 package com.hubu.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.hubu.pojo.Examin;
 import com.hubu.pojo.Msg;
+import com.hubu.pojo.User;
 import com.hubu.service.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class ExamController {
@@ -25,7 +31,38 @@ public class ExamController {
     }
 
     @RequestMapping(path = "/deleteExam",method = {RequestMethod.GET})
-    public Msg deleteExam(Integer examId){
-        return examService.deleteExam(examId) == 1 ? new Msg().success() : new Msg().fail();
+    public Msg deleteExam(String examinIds){
+        return examService.deleteExam(examinIds) > 0 ? new Msg().success() : new Msg().fail();
+    }
+    @RequestMapping(path = "/updateExam",method = {RequestMethod.POST})
+    public Msg updateExam(Examin examin){
+        return examService.updateExam(examin) == 1 ? new Msg().success() : new Msg().fail();
+    }
+    @RequestMapping(path = "/getPageExam",method = {RequestMethod.GET})
+    public Msg getPageExam(Integer currentPage){
+        PageInfo<Examin> pageExam = examService.getPageExam(currentPage);
+        return pageExam == null ? new Msg().fail() : new Msg().success().add("result",pageExam);
+    }
+    @RequestMapping(path = "/getPageExamByKeyWord",method = {RequestMethod.GET})
+    public Msg getPageExamByKeyWord(Integer currentPage,String keyword){
+        PageInfo<Examin> pageExam = examService.getPageExamByKeyWord(currentPage,keyword);
+        return pageExam == null ? new Msg().fail() : new Msg().success().add("result",pageExam);
+    }
+    @RequestMapping(path = "/getExamByExaminId")
+    public Msg getExamByExaminId(Integer examinId){
+        Examin examin = examService.getExamByExaminId(examinId);
+        return examin == null ? new Msg().fail() : new Msg().success().add("result",examin);
+    }
+
+    @RequestMapping(path = "/getExam",method = {RequestMethod.GET})
+    public Msg getExam(
+            HttpSession session,
+            Integer lessonId,
+            String account
+    ){
+        User user = (User) session.getAttribute("user");
+        Map<String,Object> map = examService.getExamByLessonIdAndAccount(lessonId,account);
+        map.put("user",user);
+        return map.containsKey("rest") ? new Msg().success().add("result",map) : new Msg().fail();
     }
 }
