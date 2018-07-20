@@ -88,4 +88,3 @@ public interface ExamDAO {
             @Result(column = "type",property = "type"),
     })
     List<Examin> getExamByLessonId(@Param("lessonId") Integer lessonId);
-}

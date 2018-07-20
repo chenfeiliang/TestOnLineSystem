@@ -7,6 +7,7 @@ import com.hubu.dao.UserDAO;
 import com.hubu.pojo.Examin;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.User;
+import com.hubu.utils.DateUtil;
 import com.hubu.utils.Myutils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -92,6 +93,8 @@ public class ExamService {
         }
     }
 
+
+
     public Map<String,Object> getExamByLessonIdAndAccount(Integer lessonId, String account) {
         try {
             List<Examin> examins = examDAO.getExamByLessonId(lessonId);
@@ -116,4 +119,5 @@ public class ExamService {
             return null;
         }
     }
+
 }

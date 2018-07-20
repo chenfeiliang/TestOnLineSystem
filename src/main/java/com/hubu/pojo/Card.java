@@ -1,5 +1,7 @@
 package com.hubu.pojo;
 
+import java.util.Objects;
+
 public class Card {
     private Integer cardId;
     private Integer examinId;

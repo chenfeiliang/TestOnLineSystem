@@ -90,6 +90,7 @@ public class PaperController {
         return papers == null ? new Msg().fail() : new Msg().success().add("result",papers);
     }
 
+
     @RequestMapping(path = "/getPaperById",method = {RequestMethod.GET})
     public Msg getPaperById(Integer paperId){
         Paper paper = paperService.getPaperById(paperId);

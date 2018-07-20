@@ -14,7 +14,14 @@ public class CardService {
 
     public Integer addCard(Card card) {
         try {
-            return cardDAO.insertCard(card);
+            int flag = cardDAO.isExit(card.getExaminId(),card.getAccount());
+            System.out.println("flag:"+flag);
+            if(flag<=0){
+                return cardDAO.insertCard(card);
+            }else{
+                return cardDAO.updateCard(card.getExaminId(),card.getAccount(),card.getOptions());
+            }
+
         }catch (Exception e){
             e.printStackTrace();
             return -1;
