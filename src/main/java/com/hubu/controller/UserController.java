@@ -36,8 +36,8 @@ public class UserController {
      * */
     @RequestMapping(path = "/deleteUser",method = {RequestMethod.GET})
     @ResponseBody
-    public Msg deleteUser(String account){
-        return userService.deleteUser(account) == 1 ? new Msg().success() : new Msg().fail();
+    public Msg deleteUser(String accounts){
+        return userService.deleteUser(accounts) > 0 ? new Msg().success() : new Msg().fail();
     }
 
     /*
@@ -82,4 +82,12 @@ public class UserController {
         User user = userService.getUserByUserId(account);
         return user == null ? new Msg().fail() : new Msg().success().add("result",user);
     }
+
+    @RequestMapping(path = "/getUserByClassId",method = {RequestMethod.GET})
+    @ResponseBody
+    public Msg getUserByClassId(Integer classId,Integer currentPage){
+        PageInfo<User> users = userService.getUserByClassId(classId,currentPage);
+        return users == null ? new Msg().fail() : new Msg().success().add("result",users);
+    }
+
 }

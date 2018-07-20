@@ -8,6 +8,7 @@ import com.hubu.pojo.Msg;
 import com.hubu.pojo.MyClass;
 import com.hubu.pojo.User;
 import com.hubu.utils.Myutils;
+import jdk.nashorn.internal.runtime.regexp.joni.constants.CCSTATE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -98,4 +99,12 @@ public class ClassService {
         }
     }
 
+    public List<MyClass> getAllClass() {
+        try {
+            return classDAO.selectClass();
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

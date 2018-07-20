@@ -94,11 +94,12 @@ public class ExamService {
 
     public Map<String,Object> getExamByLessonIdAndAccount(Integer lessonId, String account) {
         try {
-            List<Examin> examins = examDAO.getExamByLessonId(lessonId, account);
+            List<Examin> examins = examDAO.getExamByLessonId(lessonId);
             for (Examin examin : examins){
                 String[] split = examin.getAccounts().split(",");
                 List<String> strings = Arrays.asList(split);
                 if (strings.contains(account)){
+                    examin.getPaper().setAnswer("");
                     Date beginTime = examin.getBeginTime();
                     Date rest = new Date();
                     rest.setTime(beginTime.getTime() - rest.getTime());

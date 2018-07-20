@@ -106,4 +106,19 @@ public class QuestionService {
             return null;
         }
     }
+
+    public PageInfo<Question> getQuestionByLessonId(Integer currentPage,Integer lessonId) {
+        try {
+            PageHelper.startPage(currentPage,10);
+            List<Question> questions = questionDAO.selectQuestionByLessonId(lessonId);
+            PageInfo<Question> questionPageInfo  = new PageInfo<>(questions);
+            int[] nums = questionPageInfo.getNavigatepageNums();
+            int[] result = Myutils.pageCount(currentPage, nums);
+            questionPageInfo.setNavigatepageNums(result);
+            return questionPageInfo;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

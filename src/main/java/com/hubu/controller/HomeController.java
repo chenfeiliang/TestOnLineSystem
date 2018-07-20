@@ -49,7 +49,7 @@ public class HomeController {
         if (map.containsKey("errMsg"))
             return new Msg().fail().add("result",map.get("errMsg"));
         session.setAttribute("user",map.get("user"));
-        return new Msg().success().add("result",map.get("user"));
+        return new Msg().success();
     }
     /*
      * 输入：

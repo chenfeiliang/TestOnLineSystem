@@ -125,4 +125,10 @@ public class ClassController {
     ){
         return classService.batchDeleteClassById(classIds) > 0 ? new Msg().success() : new Msg().fail();
     }
+    @RequestMapping(path = "/getAllClass",method = {RequestMethod.GET})
+    @ResponseBody
+    public Msg getAllClass(){
+        List<MyClass> myClasses = classService.getAllClass();
+        return myClasses == null ? new Msg().fail() : new Msg().success().add("result",myClasses);
+    }
 }

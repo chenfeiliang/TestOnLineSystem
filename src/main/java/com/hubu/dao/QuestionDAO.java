@@ -143,4 +143,21 @@ public interface QuestionDAO {
             @Result(column = "creator",property = "creator")
     })
     List<Question> selectQuestionByIds(@Param("questionIds") String questionIds);
+
+    @Select({"select",SELECT_FIELDS,"from",TABLE_NAME,"where lessonId = #{lessonId}"})
+    @Results({
+            @Result(id = true,column = "questionId",property = "questionId"),
+            @Result(column = "title",property = "title"),
+            @Result(column = "optionA",property = "optionA"),
+            @Result(column = "optionB",property = "optionB"),
+            @Result(column = "optionC",property = "optionC"),
+            @Result(column = "optionD",property = "optionD"),
+            @Result(column = "questionKey",property = "questionKey"),
+            @Result(column = "questionLevel",property = "questionLevel"),
+            @Result(column = "lessonId",property = "lesson",
+                    one = @One(select = "com.hubu.dao.LessonDAO.selectLessonIdByName")
+            ),
+            @Result(column = "creator",property = "creator")
+    })
+    List<Question> selectQuestionByLessonId(@Param("lessonId") Integer lessonId);
 }

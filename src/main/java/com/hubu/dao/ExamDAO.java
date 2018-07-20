@@ -87,5 +87,5 @@ public interface ExamDAO {
             @Result(column = "endTime",property = "endTime"),
             @Result(column = "type",property = "type"),
     })
-    List<Examin> getExamByLessonId(@Param("lessonId") Integer lessonId,@Param("account") String account);
+    List<Examin> getExamByLessonId(@Param("lessonId") Integer lessonId);
 }

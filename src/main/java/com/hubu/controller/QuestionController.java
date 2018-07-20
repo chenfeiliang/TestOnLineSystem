@@ -100,4 +100,11 @@ public class QuestionController {
         List<Lesson> lessons = questionService.getAllLesson();
         return lessons == null ? new Msg().fail() : new Msg().success().add("result",lessons);
     }
+
+    @RequestMapping(path = "/getQuestionByLessonId",method = {RequestMethod.GET})
+    @ResponseBody
+    public Msg getQuestionByLessonId(Integer currentPage,Integer lessonId){
+        PageInfo<Question> questions = questionService.getQuestionByLessonId(currentPage,lessonId);
+        return questions == null ? new Msg().fail() : new Msg().success().add("result",questions);
+    }
 }

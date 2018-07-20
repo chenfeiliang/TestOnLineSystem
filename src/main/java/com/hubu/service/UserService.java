@@ -40,7 +40,8 @@ public class UserService {
 
     public Integer deleteUser(String account) {
         try {
-            return userDAO.deleteUser(account);
+            String s = account.replaceAll(",", "','");
+            return userDAO.deleteUser(s);
         }catch (Exception e){
             e.printStackTrace();
             return -1;
@@ -60,7 +61,7 @@ public class UserService {
 
     public PageInfo<User> getPageUser(int currentPage) {
         try {
-            PageHelper.startPage(currentPage, 10);
+            PageHelper.startPage(currentPage, 7);
             List<User> users = userDAO.selectUser();
             PageInfo<User> pageUser = new PageInfo<>(users);
             int[] nums = pageUser.getNavigatepageNums();
@@ -75,7 +76,7 @@ public class UserService {
 
     public PageInfo<User> getPageUserByKeyWord(int currentPage, String keyword) {
         try {
-            PageHelper.startPage(currentPage, 10);
+            PageHelper.startPage(currentPage, 7);
             List<User> users = userDAO.selectUserByKeyWord(keyword);
             PageInfo<User> pageUser = new PageInfo<>(users);
             int[] nums = pageUser.getNavigatepageNums();
@@ -118,6 +119,22 @@ public class UserService {
             e.printStackTrace();
             map.put("errMsg","登陆失败");
             return map;
+        }
+    }
+
+    public PageInfo<User> getUserByClassId(Integer classId,Integer currentPage) {
+        try {
+
+            PageHelper.startPage(currentPage, 7);
+            List<User> users = userDAO.selectUserByClassId(classId);
+            PageInfo<User> pageUser = new PageInfo<>(users);
+            int[] nums = pageUser.getNavigatepageNums();
+            int[] result = Myutils.pageCount(currentPage, nums);
+            pageUser.setNavigatepageNums(result);
+            return pageUser;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
     }
 }

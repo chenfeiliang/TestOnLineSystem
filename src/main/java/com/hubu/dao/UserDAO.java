@@ -14,10 +14,10 @@ public interface UserDAO {
     @Insert("insert into" + TABLE_NAME + "(" + INSERT_FIELDS + ") values(#{account},#{realName},#{password},#{classId},#{mobile},#{image},#{salt})")
     int addUser(User user);
 
-    @Delete("delete from " + TABLE_NAME + "where account=#{account}")
-    int deleteUser(String account);
+    @Delete("delete from " + TABLE_NAME + "where account in ('${account}')")
+    int deleteUser(@Param("account") String account);
 
-    @Update("update" + TABLE_NAME + "set realName=#{realName},password=#{password},mobile=#{mobile},image=#{image} where account=#{account}")
+    @Update("update" + TABLE_NAME + "set realName=#{realName},mobile=#{mobile} where account=#{account}")
     int updateUser(User user);
 
     @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME})
@@ -59,6 +59,18 @@ public interface UserDAO {
     })
     User selectUserByUserId(String account);
 
+    @Select({"select",SELECT_FIELDS,"from",TABLE_NAME,"where classId=#{classId}"})
+    @Results({
+            @Result(id = true,column = "account",property = "account"),
+            @Result(column = "realName",property = "realName"),
+            @Result(column = "password",property = "password"),
+            @Result(column = "classId",property = "myClass",
+                    one = @One(select = "com.hubu.dao.ClassDAO.selectClassById")
+            ),
+            @Result(column = "mobile",property = "mobile"),
+            @Result(column = "image",property = "image")
+    })
+    List<User> selectUserByClassId(Integer classId);
 
 
 //    @Select("select" + SELECT_FIELDS + "from" + TABLE_NAME + "limit #{currentPage},#{pageCount}")

@@ -54,6 +54,9 @@ public class ExamController {
         return examin == null ? new Msg().fail() : new Msg().success().add("result",examin);
     }
 
+//    @RequestMapping(path = "/getExamByAccount")
+//    public Msg getExamByAccount()
+
     @RequestMapping(path = "/getExam",method = {RequestMethod.GET})
     public Msg getExam(
             HttpSession session,
