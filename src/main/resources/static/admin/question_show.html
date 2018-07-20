@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>展示所有题目</title>
+		<link rel="stylesheet" href="../assets/vendors/bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" href="../assets/vendors/font-awesome/css/font-awesome.css">
+		<link rel="stylesheet" href="../assets/vendors/nprogress/nprogress.css">
+		<link rel="stylesheet" href="../assets/css/admin.css">
+		<script src="../assets/vendors/nprogress/nprogress.js"></script>
+	</head>
+	<body>
+		<script>NProgress.start();</script>
+		<div class="main">
+			<nav class="navbar">
+			</nav>
+			<div class="container-fluid">
+				<div class="page-title">
+					<h1>题目管理</h1>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="page-action">
+							<!-- show when multiple checked -->
+							<button id="del_all" class="btn btn-danger btn-sm" data-ids="" style="display: none">批量删除</button>
+                            <form class="form-inline">
+                                <input id="keyword" class="form-control input-sm" name="keyword" value="" placeholder="关键字查询">
+                                <button class="btn btn-default btn-sm byKeyWord" type="button">筛选</button>
+                            </form>
+                            <ul class="pagination pagination-sm pull-right">
+        					</ul>
+						</div>
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th class="text-center" width="40"><input type="checkbox" data-cp=""></th>
+									<th class="text-center">题目描述</th>
+									<th class="text-center">选项A</th>
+									<th class="text-center">选项B</th>
+									<th class="text-center">选项C</th>
+									<th class="text-center">选项D</th>
+									<th class="text-center" width="80">标准答案</th>
+									<th class="text-center">题目难度</th>
+									<th class="text-center">所属课程</th>
+									<th class="text-center">创建人</th>
+									<th class="text-center" width="100">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="aside">
+
+		</div>
+		<script src="../assets/vendors/jquery/jquery.js"></script>
+		<script src="../assets/vendors/bootstrap/js/bootstrap.js"></script>
+		<!--引入layer插件-->
+		<script src="../assets/vendors/layer-v3.1.1/layer/layer.js"></script>
+		<!--引入配置js-->
+		<script src="../assets/js/config.js"></script>
+		<!--引入班级的业务js-->
+		<script src="../assets/js/question/question_crud.js"></script>
+		<script>
+            $(function () {
+                // 加载公共页面
+                $(".navbar").load("navbar.html");
+                $(".aside").load("aside.html");
+                select_question(1);
+            });
+            // 筛选按钮点击事件 关键字查询
+            $(".byKeyWord").on("click",function () {
+                var kw = $("#keyword").val();
+                kw == "" ? select_question(1) : select_question_byKeyWord(kw,1);
+            });
+		</script>
+		<script>
+			NProgress.done();
+		</script>
+	</body>
+
+</html>

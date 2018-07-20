@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css" />
+		<script type="text/javascript" src="../js/jquery.min .js" ></script>
+		<script type="text/javascript" src="../bootstrap-3.3.7-dist/js/bootstrap.min.js" ></script>
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/examBefore.css" />
+		<script type="text/javascript" src="../js/examBefore.js" ></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+		
+		    <div class="topBox container" >
+		        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+		            <div class="container">
+		                <!-- Brand and toggle get grouped for better mobile display -->		     
+			                <div class="navbar-header" id="menu" >
+					            <button type="button" id="menuButton" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			                        <span class="sr-only">Toggle navigation</span>
+			                        <span class="icon-bar"></span>
+			                        <span class="icon-bar"></span>
+			                        <span class="icon-bar"></span>
+			                    </button>
+							
+			                    <a class="navbar-brand" href="#" id="BrandA" >
+			                        <img alt="" id="BrandImg" src="img/hubu-logo.png">
+			                    </a>   
+			                    
+			                     <div class="dropdown" id="userDrop">
+				                        <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">陈飞良<span class="caret"></span></a>
+				                        <ul class="dropdown-menu" >
+				                            <li><a href="#" >更改密码</a></li>
+				                            <li><a href="#">退出</a></li>	
+				                        </ul>
+			                    </div>
+			                    
+			                    <div class="collapse navbar-collapse" id="mynavbar" >
+			                        <ul class="nav navbar-nav" >
+			                            <li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>
+			                            <li><a href="#">成绩查询</a></li>
+			                            <li><a href="#">错题查询</a></li>
+			                            <li><a href="#">最新公告</a></li>
+			                             <li><a href="#">联系我们</a></li>
+			                        </ul>		                     
+			                    </div><!-- /.navbar-collapse -->
+							</div>
+		            </div><!-- /.container-->
+		        </nav>
+		        
+		    </div>
+		
+			<div class="centerBox container" >
+				<div class="headBox" >
+					<p id="titleP">
+						<span id="titleSpan"></span>
+					</p>
+				</div>
+				
+				<div class="bodyBox container">
+
+					<h3 class="container" style="width: 250px;">考前须知</h3>
+					
+					<div class="container" style="width:700px;font-family: '宋体';font-size: 16px;">
+						<ol id="note">
+							<li>考试过程如遇设备或考试系统故障不能解决，可举手请求监考老师协助。</li>
+							<li>如在考试过程中突然患疾病，应当及时向监考员报告，停止考试。</li>
+							<li>考生须严格遵守考试时间安排，考试期间保持考场安静，不得吸烟、阅读书报、吃零食、交谈。</li>
+							<li>如短时间停电，考生无须担心，不会影响考试成绩，坐在考试位置上不要动，恢复供电后，重新登录考试机，可以从正在做的试题继续答题。</li>
+							<li>如短时间断网，无需担心，考试机可以继续答题。</li>
+							<li>如因长时间停电或断网等不可抗力因素，考试将中断，事后由考试主办部门安排重考。</li>
+							<li>因考生违反以上规定所造成的损失由考生自行承担。</li>
+						</ol>
+					</div>
+					
+					<div class="container" style="width: 700px;margin-top: 40px;">
+						<p style="font-family: '宋体';font-size: 20px;">
+							距离考试开始时间还有：&nbsp;
+							<span id="daySpan"></span>&nbsp;日&nbsp;
+							<span id="hourSpan"></span>&nbsp;时&nbsp;
+							<span id="minuteSpan"></span>&nbsp;分&nbsp;						
+							<span id="secondSpan"></span>&nbsp;秒&nbsp;
+						</p>
+					</div>
+				
+					<div class="container" style="width: 400px;margin-top: 50px;">
+						<button style="width: 300px;" class="btn btn-primary" onclick="beginExam();">开始考试</button>		
+					</div>
+
+				</div>
+				
+				<div class="footBox container" style="height: 300px;">
+					
+				</div>
+				
+			</div>
+		</div>
+	</body>
+</html>

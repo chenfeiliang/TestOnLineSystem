@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard &laquo; Admin</title>
+    <link rel="stylesheet" href="../assets/vendors/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/vendors/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../assets/vendors/nprogress/nprogress.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <script src="../assets/vendors/nprogress/nprogress.js"></script>
+</head>
+<body>
+<script>NProgress.start()</script>
+
+<div class="main">
+    <nav class="navbar">
+
+    </nav>
+    <div class="container-fluid">
+        <div class="page-title">
+            <h1 id="page_title"></h1>
+        </div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">头像</label>
+                <div class="col-sm-3">
+                    <label class="form-image">
+                        <img class="avatar" width="80" src="../assets/img/default.png">
+                    </label>
+                    <p class="help-block">新头像由系统自动生成</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="account" class="col-sm-3 control-label">用户名</label>
+                <div class="col-sm-6">
+                    <input id="account" class="form-control" name="account" type="type" value="" placeholder="用户名" readonly>
+                    <p class="help-block">登录用户名不可更改</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="realName" class="col-sm-3 control-label">真实姓名</label>
+                <div class="col-sm-6">
+                    <input id="realName" class="form-control" name="realName" type="type" value="" placeholder="真实姓名">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="mobile" class="col-sm-3 control-label">手机号</label>
+                <div class="col-sm-6">
+                    <input id="mobile" class="form-control" name="mobile" type="text" value="" placeholder="手机号">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-3">
+                    <button type="button" class="btn btn-primary update_user">更新</button>
+                    <a class="btn btn-link" href="password_reset.html">修改密码</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="aside">
+
+</div>
+
+<script src="../assets/vendors/jquery/jquery.js"></script>
+<script src="../assets/vendors/bootstrap/js/bootstrap.js"></script>
+<!--引入layer插件-->
+<script src="../assets/vendors/layer-v3.1.1/layer/layer.js"></script>
+<!--引入配置js-->
+<script src="../assets/js/config.js"></script>
+<script>
+    $(function () {
+        // 加载公共页面
+        $(".navbar").load("navbar.html");
+        $(".aside").load("aside.html");
+    });
+</script>
+<!--引入更新业务js-->
+<script src="../assets/js/user/user_up.js"></script>
+<script>NProgress.done()</script>
+</body>
+</html>

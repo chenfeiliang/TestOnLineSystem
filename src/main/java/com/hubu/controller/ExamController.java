@@ -1,7 +1,5 @@
 package com.hubu.controller;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.hubu.pojo.Examin;
 import com.hubu.pojo.Msg;

@@ -1,0 +1,91 @@
+<div class="profile">
+    <img class="avatar" src="../uploads/avatar.jpg">
+    <h3 class="name">布头儿</h3>
+</div>
+<ul class="nav">
+    <li id="index_page">
+        <a href="index.html"><i class="fa fa-dashboard"></i>仪表盘</a>
+    </li>
+    <li id="question_manage">
+        <a href="#menu-questions" class="collapsed" data-toggle="collapse">
+            <i class="fa fa-file-code-o"></i>题库管理<i class="fa fa-angle-right"></i>
+        </a>
+        <ul id="menu-questions" class="collapse">
+            <li id="all_question"><a href="question_show.html"><i class="fa fa-circle-o"></i>所有题目</a></li>
+            <li id="add_question"><a href="question_add.html"><i class="fa fa-plus-square-o"></i>出题</a></li>
+        </ul>
+    </li>
+    <li id="paper_manage">
+        <a href="#menu-papers" class="collapsed" data-toggle="collapse">
+            <i class="fa fa-sticky-note-o"></i>试卷管理<i class="fa fa-angle-right"></i>
+        </a>
+        <ul id="menu-papers" class="collapse">
+            <li id="all_paper"><a href="paper_show.html"><i class="fa fa-circle-o"></i>所有试卷</a></li>
+            <li id="add_paper"><a href="paper_add.html"><i class="fa fa-plus-square-o"></i>出卷</a></li>
+        </ul>
+    </li>
+    <li id="class_manage">
+        <a href="class_manage.html"><i class="fa fa-thumb-tack"></i>班级管理</a>
+    </li>
+    <li id="lesson_manage">
+        <a href="lesson_manage.html"><i class="fa fa-superpowers"></i>课程管理</a>
+    </li>
+    <li>
+        <a href="#"><i class="fa fa-puzzle-piece"></i>考场管理</a>
+    </li>
+    <li id="user_manage">
+        <a href="users.html"><i class="fa fa-user-circle-o"></i>用户管理</a>
+    </li>
+    <li>
+        <a href="#menu-settings" class="collapsed" data-toggle="collapse">
+            <i class="fa fa-cogs"></i>其它<i class="fa fa-angle-right"></i>
+        </a>
+        <ul id="menu-settings" class="collapse">
+            <li><a href="#">导航菜单</a></li>
+            <li><a href="#">图片轮播</a></li>
+            <li><a href="#">网站设置</a></li>
+        </ul>
+    </li>
+</ul>
+<!--引入layer插件-->
+<script src="../assets/vendors/layer-v3.1.1/layer/layer.js"></script>
+<script>
+    // 侧边导航高亮显示
+    // 获取当前HTML页面路径
+    var path = window.location.pathname;
+    // 截取出文件名
+    var page_name = path.split("/")[2];
+    var name_flag = page_name.substr(0,page_name.length-5);
+    if (name_flag === "index"){
+        $("#index_page").addClass("active")
+    } else if (name_flag === "question_show") {
+        question_high();
+        $("#all_question").addClass("active");
+    } else if (name_flag === "question_add"){
+        question_high();
+        $("#add_question").addClass("active");
+        // alert($("#add_question").hasClass("active"));
+    } else if (name_flag === "paper_show"){
+        paper_high();
+        $("#all_paper").addClass("active");
+    } else if (name_flag === "paper_add"){
+        paper_high();
+        $("#add_paper").addClass("active");
+    } else if (name_flag === "class_manage") {
+        $("#class_manage").addClass("active");
+    } else if (name_flag === "lesson_manage") {
+        $("#lesson_manage").addClass("active");
+    } else if (name_flag === "users" || name_flag === "user_up") {
+        $("#user_manage").addClass("active");
+    }
+
+    // 导航展开
+    function question_high() {
+        $("#menu-questions").addClass("in");
+        $("#question_manage").addClass("active");
+    }
+    function paper_high() {
+        $("#menu-papers").addClass("in");
+        $("#paper_manage").addClass("active");
+    }
+</script>

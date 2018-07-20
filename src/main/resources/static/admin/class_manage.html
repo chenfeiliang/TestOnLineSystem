@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>班级管理</title>
+  <link rel="stylesheet" href="../assets/vendors/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="../assets/vendors/font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="../assets/vendors/nprogress/nprogress.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <script src="../assets/vendors/nprogress/nprogress.js"></script>
+</head>
+<body>
+  <script>NProgress.start()</script>
+
+  <div class="main">
+    <nav class="navbar">
+
+    </nav>
+    <div class="container-fluid">
+      <div class="page-title">
+        <h1>班级管理</h1>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <form id="edit_class">
+            <h2 id="class_title">添加新班级</h2>
+            <div class="form-group">
+              <label for="class_name">名称</label>
+              <input data-id="" id="class_name" class="form-control" name="className" type="text" placeholder="班级名称">
+            </div>
+            <div class="form-group">
+              <a id="update_class" class="btn btn-primary" href="javascript:void(0);" style="display: none;">保存提交</a>
+              <a id="add_class" class="btn btn-primary" href="javascript:void(0);">添加</a>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-8">
+          <div class="page-action">
+        <!-- show when multiple checked -->
+        <button id="del_all" class="btn btn-danger btn-sm" data-ids="" style="display: none">批量删除</button>
+        <ul class="pagination pagination-sm pull-right">
+        </ul>
+      </div>
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th class="text-center" width="40"><input type="checkbox" data-cp=""></th>
+                <th class="text-center" width="200">班级名称</th>
+                <th class="text-center" width="100">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="aside">
+  </div>
+
+  <script src="../assets/vendors/jquery/jquery.js"></script>
+  <script src="../assets/vendors/bootstrap/js/bootstrap.js"></script>
+  <!--引入layer插件-->
+  <script src="../assets/vendors/layer-v3.1.1/layer/layer.js"></script>
+  <!--引入配置js-->
+  <script src="../assets/js/config.js"></script>
+  <!--引入班级的业务js-->
+  <script src="../assets/js/classes/class_crud.js"></script>
+  <script src="../assets/js/classes/class_add_dels.js"></script>
+  <script>
+      $(function () {
+          // 加载公共页面
+          $(".navbar").load("navbar.html");
+          $(".aside").load("aside.html");
+          select_class(1);
+      })
+  </script>
+  <script>NProgress.done()</script>
+</body>
+</html>

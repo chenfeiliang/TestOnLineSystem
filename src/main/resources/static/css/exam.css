@@ -1,0 +1,140 @@
+
+		
+		.centerBox{
+			background-color: white;
+			margin-top: 75px;
+			 width: 70%;
+			 padding: 0px;
+			 border-radius: 5px;
+		}
+		
+		.headBox{
+			height: 50px;
+			background: #232C31;
+			border-top-right-radius: 5px;
+			border-top-left-radius: 5px;
+		}
+		
+		#titleDiv{
+			width:100%;
+		}
+		
+		.title_leftBox{
+			width: 80%;
+			height: 50px; 
+			float: left;
+		}
+		
+		.title_rightBox{
+			width: 20%;
+			height: 50px;
+			background-color: #2D3339;
+			float: left;
+		}
+		
+		.time_leftBox{
+			width: 30%;
+			float: left;
+			height:50px;
+		}
+		
+		.time_rightBox{
+			color: white;
+			font-size:20px;
+			width: 70%;
+			height:50px;
+			float: left;
+		}
+		
+		#timeP{
+			margin-top: 10px;
+			margin-left: 10px;
+		}
+		
+		.bodyBox{
+			border-bottom: 1px dashed gray;
+		}
+		
+		.exam_title{
+			border-bottom: 1px solid #31B0D5;
+			height: 50px;
+			font-size: 19px;
+		}
+		
+		#questionType{
+			margin-left: 20px;
+			margin-top: 15px;
+		}
+		
+		.ButtonsDiv{
+			 margin-top: 5px;
+			 margin-left: 55%;
+		}
+		
+		#finishBTN{
+			width: 130px;
+			border: 1px solid;
+			height: 40px;
+			margin-right: 10px; 
+			background: #FF6547;
+			color: white;
+		}
+		
+		#beforeBTN{
+			width: 130px;
+			border: 1px solid;
+			height: 40px;
+			margin-right:10px;
+			background: #00BC9B;
+		}
+		
+		#nextBTN{
+			width: 130px;
+			border: 1px solid;
+			height: 40px;
+			margin-right:10px;
+			background: #00BC9B;
+		}
+		
+		#showP{
+			font-size: 15px;
+			margin-top: 20px;
+			 font-family: '宋体';
+		}
+		
+		#cardDiv{
+			width: 75%;
+			margin-top: 30px;
+		}
+		
+		#titleP{
+			color: white;
+			height: 50px;
+			padding-left: 50px ;
+			padding-top: 5px;"
+		}
+		
+		#titleSpan{
+			margin-top:30px;
+			font-size: 25px;
+		}
+		
+		.title{
+				font-family: "宋体";
+				font-size: 17px;
+				margin-top: 20px;
+				margin-left: 5px;	
+		}
+
+    	.selectedCard{
+			background: #00BC9B;
+			color: white;			
+		}
+
+		.opCheckBox{
+			border-radius: 5px;
+			width: 15px;
+			height: 15px;	
+			float: right;
+		}
+		
