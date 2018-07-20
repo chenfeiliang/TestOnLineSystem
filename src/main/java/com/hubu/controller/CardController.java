@@ -16,6 +16,7 @@ public class CardController {
 
     @RequestMapping(path = "/addCard",method = {RequestMethod.POST})
     public Msg addCard(Card card){
+        card.setAccount("jiao3");
         return cardService.addCard(card) == 1 ? new Msg().success() : new Msg().fail();
     }
 }
