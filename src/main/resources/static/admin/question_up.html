@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>Add new post &laquo; Admin</title>
+    <link rel="stylesheet" href="../assets/vendors/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/vendors/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../assets/vendors/nprogress/nprogress.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <script src="../assets/vendors/nprogress/nprogress.js"></script>
+</head>
+<body>
+<script>NProgress.start()</script>
+
+<div class="main">
+    <nav class="navbar">
+
+    </nav>
+    <div class="container-fluid">
+        <div class="page-title">
+            <h1 id="question_title"></h1>
+        </div>
+        <form id="edit_question" class="row" style="margin-left: 200px;">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="title">题目描述：</label>
+                    <textarea id="title" data-id="" class="form-control input-lg" name="title"  rows="5" placeholder="题目描述"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="optionA">选项A：</label>
+                    <textarea id="optionA" class="form-control input-lg" name="optionA" rows="2" placeholder="选项A"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="optionB">选项B：</label>
+                    <textarea id="optionB" class="form-control input-lg" name="optionB" rows="2" placeholder="选项B"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="optionC">选项C：</label>
+                    <textarea id="optionC" class="form-control input-lg" name="optionC" rows="2" placeholder="选项C"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="optionD">选项D：</label>
+                    <textarea id="optionD" class="form-control input-lg" name="optionD" rows="2" placeholder="选项D"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="questionKey">标准答案：</label>
+                    <select id="questionKey" class="form-control" name="questionKey">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="questionLevel">题目难度：</label>
+                    <select id="questionLevel" class="form-control" name="questionLevel">
+                        <option value="容易">容易</option>
+                        <option value="一般">一般</option>
+                        <option value="困难">困难</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="lessonId">所属课程：</label>
+                    <select id="lessonId" class="form-control" name="lessonId">
+
+                    </select>
+                </div>
+                <input id="creator" name="creator" type="hidden" value=""/>
+                <div class="form-group">
+                    <a id="update_question" class="btn btn-primary" href="javascript:void(0);">保存提交</a>
+                    <a id="add_question" class="btn btn-primary" href="question_add.html">添加新的</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="aside">
+
+</div>
+<!--引入第三方插件-->
+<script src="../assets/vendors/jquery/jquery.js"></script>
+<script src="../assets/vendors/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendors/layer-v3.1.1/layer/layer.js"></script>
+<!--引入配置js-->
+<script src="../assets/js/config.js"></script>
+<!--引入班级的业务js-->
+<script src="../assets/js/question/question_crud.js"></script>
+<!--引入session库-->
+<script src="../assets/vendors/jquerysession/jquerysession.js"></script>
+<!--引入课程信息下拉列表-->
+<script src="../assets/js/question/show_lesson.js"></script>
+<script>
+    $(function () {
+        // 加载公共页面
+        $(".navbar").load("navbar.html");
+        $(".aside").load("aside.html");
+    })
+</script>
+<script src="../assets/js/question/question_up.js"></script>
+<script>NProgress.done()</script>
+</body>
+</html>

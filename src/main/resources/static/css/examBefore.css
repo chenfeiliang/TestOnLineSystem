@@ -1,0 +1,119 @@
+		
+		body{
+			background-color: #EEEEEE;
+			}
+			
+			
+			
+			
+		#note li{
+				margin-top: 20px;	
+		}
+
+		#title{
+				font-family: "宋体";
+				font-size: 16px;
+				margin-top: 20px;
+				margin-left: 5px;	
+		}
+		
+		.optionOl{
+			margin-left: 60px;
+		}
+		.option{
+			border: 1px solid gainsboro;
+			margin-top: 20px;
+			font-family: "宋体";
+			font-size: 16px;
+			padding: 12px;
+		}
+		
+		.opCheckBox{
+			border-radius: 5px;
+			width: 15px;
+			height: 15px;	
+			
+		}
+		
+		.cardID{
+			border: none;
+			width: 50px;
+			height: 50px;
+			color: #2AABD2;
+			background:  white;
+			cursor: pointer;
+			list-style-type: none;
+			float: left;
+			line-height: 50px;
+			text-align: center;
+			margin-left: 20px;
+		}
+		
+		#cardid1{
+			background: #00BC9B;
+			color: white;
+		}
+		
+		#menu{
+			width: 100%;
+			float: left;
+		}
+		
+		#menuButton{
+			 float: right;
+		}
+		
+		#BrandA{
+			margin-left: -10px;
+		}
+		
+		#BrandImg{
+			width: 100px; 
+			height: 40px;
+			margin-top: -10px;
+		}
+		
+		#userDrop{
+			width: 100px;
+			float: left;
+			margin-left: 10px;
+		}
+		
+		#mynavbar{
+			margin-left: 30%;
+		}
+		
+		.centerBox{
+			background-color: white;
+			margin-top: 75px;
+			 width: 70%;
+			 padding: 0px;
+			 border-radius: 5px;
+		}
+		
+		.headBox{
+			height: 50px;
+			background: #232C31;
+			border-top-right-radius: 5px;
+			border-top-left-radius: 5px;
+		}
+		
+		#thead{
+			text-align: center;
+		}
+		
+		.tr1{
+			text-align: center;
+		}
+
+		#titleP{
+			color: white;
+			height: 50px;
+			padding-left: 50px ;
+			padding-top: 5px;"
+		}
+		
+		#titleSpan{
+			margin-top:30px;
+			font-size: 25px;
+		}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>Users &laquo; Admin</title>
+  <link rel="stylesheet" href="../assets/vendors/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="../assets/vendors/font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="../assets/vendors/nprogress/nprogress.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <script src="../assets/vendors/nprogress/nprogress.js"></script>
+</head>
+<body>
+  <script>NProgress.start()</script>
+
+  <div class="main">
+    <nav class="navbar">
+      
+    </nav>
+    <div class="container-fluid">
+      <div class="page-title">
+        <h1>用户管理</h1>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="page-action">
+            <!-- show when multiple checked -->
+            <a id="del_all" class="btn btn-danger btn-sm" data-ids="" href="javascript:;" style="display: none">批量删除</a>
+            <form class="form-inline">
+              <select id="all_class" name="" class="form-control input-sm">
+
+              </select>
+              <input id="keyword" class="form-control input-sm" name="keyword" value="" placeholder="关键字查询">
+              <button class="btn btn-default btn-sm byKeyWord" type="button">筛选</button>
+            </form>
+          	<ul class="pagination pagination-sm pull-right">
+          		<!--<li><a href="#">上一页</a></li>-->
+          		<!--<li><a href="#">1</a></li>-->
+          		<!--<li><a href="#">2</a></li>-->
+          		<!--<li><a href="#">3</a></li>-->
+          		<!--<li><a href="#">下一页</a></li>-->
+            </ul>
+          </div>
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+               <tr>
+                <th class="text-center" width="40"><input type="checkbox" data-cp=""></th>
+                <th class="text-center" width="80">头像</th>
+                <th class="text-center" width="120">用户名</th>
+                <th class="text-center" width="120">真实姓名</th>
+                <th class="text-center" width="120">所属班级</th>
+                <th class="text-center" width="120">手机号码</th>
+                <th class="text-center" width="100">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <!--<td class="text-center"><img class="avatar" src="../assets/img/default.png"></td>-->
+                <!--<td class="text-center">i@zce.me</td>-->
+                <!--<td class="text-center">zce</td>-->
+                <!--<td class="text-center">汪磊</td>-->
+                <!--<td class="text-center">激活</td>-->
+                <!--<td class="text-center">-->
+                  <!--<a href="user_add.html" class="btn btn-default btn-xs">编辑</a>-->
+                  <!--<a href="javascript:;" class="btn btn-danger btn-xs">删除</a>-->
+                <!--</td>-->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="aside">
+
+  </div>
+
+  <script src="../assets/vendors/jquery/jquery.js"></script>
+  <script src="../assets/vendors/bootstrap/js/bootstrap.js"></script>
+  <!--引入layer插件-->
+  <script src="../assets/vendors/layer-v3.1.1/layer/layer.js"></script>
+  <!--引入配置js-->
+  <script src="../assets/js/config.js"></script>
+  <!--引入user业务js-->
+  <script src="../assets/js/user/user_crud.js"></script>
+  <script>
+    $(function () {
+        // 加载公共页面
+        $(".navbar").load("navbar.html");
+        $(".aside").load("aside.html");
+        select_user(1);
+        // 下拉列表change事件
+        $("#all_class").on("change",function () {
+            var cId = $(this).val();
+            // 根据班级查询学生
+            select_user_byClass(cId,1);
+        });
+        // 筛选按钮点击事件 关键字查询
+        $(".byKeyWord").on("click",function () {
+            // 下拉列表重置为所有班级
+            $("#all_class option:first").prop("selected","selected");
+            var kw = $("#keyword").val();
+            // 根据是否输入关键字进行查询
+            kw == "" ? select_user(1) : select_user_byKeyWord(kw,1);
+        });
+    });
+  </script>
+  <!--引入班级信息下拉列表-->
+  <script src="../assets/js/user/show_class.js"></script>
+  <script>NProgress.done()</script>
+</body>
+</html>

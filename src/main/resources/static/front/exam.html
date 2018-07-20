@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css" />
+		<script type="text/javascript" src="../js/jquery.min .js" ></script>
+		<script type="text/javascript" src="../bootstrap-3.3.7-dist/js/bootstrap.min.js" ></script>
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/exam.css" />
+		<script type="text/javascript" src="../js/exam.js" ></script>
+	</head>
+	<body>
+		<div class="container-fluid">		
+		    <div class="topBox container" >
+		        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+		            <div class="container">
+		                <!-- Brand and toggle get grouped for better mobile display -->		     
+			                <div class="navbar-header" id="menu" >
+					            <button type="button" id="menuButton" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			                        <span class="sr-only">Toggle navigation</span>
+			                        <span class="icon-bar"></span>
+			                        <span class="icon-bar"></span>
+			                        <span class="icon-bar"></span>
+			                    </button>
+							
+			                    <a class="navbar-brand" href="#" id="BrandA" >
+			                        <img alt="" id="BrandImg" src="img/hubu-logo.png">
+			                    </a>   
+			                    
+			                     <div class="dropdown" id="userDrop">
+				                        <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">陈飞良<span class="caret"></span></a>
+				                        <ul class="dropdown-menu" >
+				                            <li><a href="#" >更改密码</a></li>
+				                            <li><a href="#">退出</a></li>	
+				                        </ul>
+			                    </div>
+			                    
+			                    		                    <!-- Collect the nav links, forms, and other content for toggling -->
+			                    <div class="collapse navbar-collapse" id="mynavbar" >
+			                        <ul class="nav navbar-nav" >
+			                            <li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>
+			                            <li><a href="#">成绩查询</a></li>
+			                            <li><a href="#">错题查询</a></li>
+			                            <li><a href="#">最新公告</a></li>
+			                             <li><a href="#">联系我们</a></li>
+			                        </ul>		                     
+			                    </div><!-- /.navbar-collapse -->
+							</div>
+		            </div><!-- /.container-->
+		        </nav>
+		        
+		    </div>
+		
+			<div class="centerBox container" >
+				<div class="headBox" >
+						<div class="title_leftBox" >
+							<p id="titleP">
+								<span id="titleSpan"></span>
+							</p>
+						</div>
+						
+						<div class="title_rightBox" >
+							<div class="time">
+								<div class="time_leftBox" ></div>
+								<div class="time_rightBox" >
+									<p  id="timeP">
+										<span id="hourSpan"></span>&nbsp;:&nbsp;
+										<span id="minuteSpan"></span>&nbsp;:&nbsp;						
+										<span id="secondSpan"></span>
+									</p>
+								</div>
+							</div>
+						</div>
+				</div>
+				
+				<div class="bodyBox" >
+
+					<div class="exam_title" >
+						 <div  id="questionType">
+						 	[单项选择题]	 
+						 </div>
+					</div>
+					
+					<div class="container"  id="titleDiv">
+
+
+					</div>
+
+					<div class="ButtonsDiv">
+						<button  class="btn" id="finishBTN" onclick="finish()">提前交卷</button>	
+						<button  class="btn btn-primary" id="beforeBTN" onclick="beforeQuestion()">上一题</button>	
+						<button  class="btn btn-primary" id="nextBTN" onclick="nextQuestion()">下一题</button>	
+					</div>
+					
+					<div class="n" style="height: 30px;">&nbsp;</div>
+				</div>
+				
+				<div class="footBox container" >
+					<div class="answer-sheet-box open" style="cursor: pointer;" id="cardProcess" onclick="show()">
+						<p  id="showP">收起答题卡&nbsp;&nbsp;<span class="glyphicon glyphicon-menu-down" id="showIcon"></span></p>			
+					</div>
+					
+					<div  id="cardDiv">
+						<div class="row">
+						  <ul id="cardUl">	
+						  
+						  </ul>
+					  
+						</div>
+					</div>
+		
+					<div class="n" style="height: 100px;"></div>
+				</div>
+				
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css" />
+		<script type="text/javascript" src="../js/jquery.min .js" ></script>
+		<script type="text/javascript" src="../bootstrap-3.3.7-dist/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="../js/index.js" ></script>
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/index.css" />
+	</head>
+	<body>
+		<div class="container-fluid">
+		
+		    <div class="topBox container" >
+		        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+		            <div class="container">
+		                <!-- Brand and toggle get grouped for better mobile display -->		     
+			                <div class="navbar-header" id="menu" >
+					            <button type="button" id="menuButton" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			                        <span class="sr-only">Toggle navigation</span>
+			                        <span class="icon-bar"></span>
+			                        <span class="icon-bar"></span>
+			                        <span class="icon-bar"></span>
+			                    </button>
+							
+			                    <a class="navbar-brand" href="#" id="BrandA" >
+			                        <img alt="" id="BrandImg" src="img/hubu-logo.png">
+			                    </a>   
+			                    
+			                     <div class="dropdown" id="userDrop">
+				                        <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">陈飞良<span class="caret"></span></a>
+				                        <ul class="dropdown-menu" >
+				                            <li><a href="#" >更改密码</a></li>
+				                            <li><a href="#">退出</a></li>	
+				                        </ul>
+			                    </div>
+			                    
+			                    <div class="collapse navbar-collapse" id="mynavbar" >
+			                        <ul class="nav navbar-nav" >
+			                            <li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>
+			                            <li><a href="#">成绩查询</a></li>
+			                            <li><a href="#">错题查询</a></li>
+			                            <li><a href="#">最新公告</a></li>
+			                             <li><a href="#">联系我们</a></li>
+			                        </ul>		                     
+			                    </div><!-- /.navbar-collapse -->
+							</div>
+		            </div><!-- /.container-->
+		        </nav>
+		        
+		    </div>
+		
+			<div class="centerBox container" >
+				<div class="headBox" >
+
+				</div>
+				
+				<div class="bodyBox container">
+
+					<h3 class="container" style="width: 340px;margin-top: 70px;">请选择你的考试</h3>
+					
+					<div style="width:800px;margin-top: 70px;margin-left: 100px;">
+						<table class="table">
+							<thead id="thead">
+								<tr  class="row">
+									<td class="col-md-4">序号</td>
+									<td class="col-md-4">考试名称</td>
+									<td class="col-md-4">时间</td>									
+								</tr>
+							</thead>
+							
+							<tbody id="tableBody">
+
+							</tbody>								
+						</table>
+					</div>
+	
+				</div>
+				
+				<div class="footBox container" style="height: 200px;">
+					
+				</div>
+				
+			</div>
+		</div>
+	</body>
+</html>
