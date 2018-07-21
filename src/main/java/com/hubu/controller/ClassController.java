@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.MyClass;
 import com.hubu.service.ClassService;
-import com.hubu.service.PageService;
+//import com.hubu.service.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +17,8 @@ import java.util.List;
 public class ClassController {
     @Autowired
     ClassService classService;
-    @Autowired
-    PageService pageService;
+//    @Autowired
+//    PageService pageService;
     /*
      * 输入：班级信息
      * 操作：存储班级信息

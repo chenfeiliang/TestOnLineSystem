@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hubu.dao.PageCountDAO">
-    <sql id="selectFields">count(*)</sql>
-    <select id="selectPageCount" resultType="integer">
-        SELECT
-        <include refid="selectFields"/>
-        FROM
-        ${tableName}
-        <if test="keyword != null">
-            WHERE ${whereField} like '%${keyword}%'
-        </if>
-    </select>
-</mapper>
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+        <!--"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >-->
+<!--<mapper namespace="com.hubu.dao.PageCountDAO">-->
+    <!--<sql id="selectFields">count(*)</sql>-->
+    <!--<select id="selectPageCount" resultType="integer">-->
+        <!--SELECT-->
+        <!--<include refid="selectFields"/>-->
+        <!--FROM-->
+        <!--${tableName}-->
+        <!--<if test="keyword != null">-->
+            <!--WHERE ${whereField} like '%${keyword}%'-->
+        <!--</if>-->
+    <!--</select>-->
+<!--</mapper>-->

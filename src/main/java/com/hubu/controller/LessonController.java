@@ -19,8 +19,8 @@ import java.util.List;
 public class LessonController {
     @Autowired
     LessonService lessonService;
-    @Autowired
-    PageService pageService;
+//    @Autowired
+//    PageService pageService;
     @RequestMapping(value = "/addLesson",method = {RequestMethod.POST})
     @ResponseBody
     public Msg addLesson(Lesson lesson){

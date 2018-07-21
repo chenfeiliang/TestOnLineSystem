@@ -42,7 +42,7 @@ public class PaperController {
                                 @RequestParam("lessonId") Integer lessonId,
                                 @RequestParam("level1Count") Integer level1Count,
                                 @RequestParam("level2Count") Integer level2Count,
-                                @RequestParam("level3Count") Integer level3Count
+                                @RequestParam(value = "level3Count") Integer level3Count
     ){
         return paperService.addPaperByRandom(title,lessonId,level1Count,level2Count,level3Count) == 1 ? new Msg().success() : new Msg().fail();
     }

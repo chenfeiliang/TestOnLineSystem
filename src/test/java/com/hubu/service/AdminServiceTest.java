@@ -1,8 +1,5 @@
 package com.hubu.service;
 
-import com.hubu.dao.AdminDao;
-import com.hubu.pojo.Admin;
-import com.hubu.pojo.Msg;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

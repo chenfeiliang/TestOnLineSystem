@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hubu.dao.AchievementDAO">
+    <sql id="selectFields">account,examinId,lessonId,classId,score</sql>
+    <sql id="tableName">achievement</sql>
+    <select id="selectAchievement" resultMap="AchievementResult">
+        select
+        <include refid="selectFields"/>
+        from
+        <include refid="tableName"/>
+        <where>
+            <if test="account != null">
+                account = #{account}
+            </if>
+            <if test="lessonId != 0">
+                and lessonId = #{lessonId}
+            </if>
+            <if test="classId != 0">
+                and classId = #{classId}
+            </if>
+        </where>
+    </select>
+
+    <resultMap id="AchievementResult" type="com.hubu.pojo.Achievement">
+        <association property="lesson" column="lessonId" javaType="com.hubu.pojo.Lesson" select="com.hubu.dao.LessonDAO.selectLessonIdByName"/>
+        <association property="myClass" column="classId" javaType="com.hubu.pojo.MyClass" select="com.hubu.dao.ClassDAO.selectClassById"/>
+        <association property="examin" column="examinId" javaType="com.hubu.pojo.Examin" select="com.hubu.dao.ExamDAO.selectExamByExaminId"/>
+    </resultMap>
+
+</mapper>
