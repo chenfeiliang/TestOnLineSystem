@@ -51,30 +51,41 @@ public class HomeController {
             User user,
             HttpSession session
     ) {
+
         Map<String, Object> map = userService.login(user);
+
         if (map.containsKey("errMsg"))
             return new Msg().fail().add("result",map.get("errMsg"));
-        session.setAttribute("user",map.get("user"));
+        User userTemp = (User) map.get("user");
+        session.setAttribute("user",userTemp.getAccount());
+
         return new Msg().success();
     }
 
     @RequestMapping(path = "getExamByAccount",method = {RequestMethod.GET})
     public Msg getExamByAccount(HttpSession session)
     {
-/*        Object object = session.getAttribute("user");
-        String account = String.valueOf(object) ;*/
-        String account = "jiao3";
-        List<Map> examins =   homeService.getExamByAccount(account);
-
-        return new Msg().success().add("result",examins);
+        try{
+            Object object = session.getAttribute("user");
+            String account = String.valueOf(object) ;
+            List<Map> examins =   homeService.getExamByAccount(account);
+            return new Msg().success().add("result",examins).add("user",account);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return  new Msg().fail();
+        }
     }
 
     @RequestMapping(path = "/getExamTitleAndTitleByExamId",method = {RequestMethod.GET})
-    public Msg getExamTitleAndTitleByExamId(Integer examinId)
+    public Msg getExamTitleAndTitleByExamId(Integer examinId,HttpSession session)
     {
-        Map<String,Object> result = homeService.getExamTitleAndTimeById(examinId);
+        Object object = session.getAttribute("user");
+        String account = String.valueOf(object) ;
 
-        return new Msg().success().add("result",result);
+        Map<String,Object> result = homeService.getExamTitleAndTimeById(examinId,account);
+
+        return result==null? new Msg().fail().add("errorInfo","你已经参加过考试，请勿重复参加"):new Msg().success().add("result",result).add("user",account);
     }
 
     /*
@@ -83,32 +94,28 @@ public class HomeController {
      * 输出：试卷信息
      * */
     @RequestMapping("/getCardByExamId")
-    public Msg getExamPaperByExamId(Integer examinId){
+    public Msg getExamPaperByExamId(Integer examinId,HttpSession session){
 
-        String account = "";
-        Map<String,Object> result = homeService.getCardByExamId(examinId);
+        Object object = session.getAttribute("user");
+        String account = String.valueOf(object) ;
 
-        return result!=null? new Msg().success().add("result",result):new Msg().fail();
+        return homeService.getCardByExamId(examinId,account);
     }
 
-    /*
-     * 输入：
-     * 操作：使用Session中的userId，存储试卷信息
-     * 输出：存储结果
-     * */
-/*    @RequestMapping("/saveCard")
-    public Msg savePaper(Card card){
-        return homeService.saveCard(card)==1?new Msg().success():new Msg().fail();
 
-    }*/
 
     /*
      * 输入：
      * 操作：使用Session中的userId，查找对应成绩
      * 输出：成绩信息
      * */
-    public Msg getScore(){
-        return new Msg().success().add("","");
+    @RequestMapping("/getScore")
+    public Msg getScore(HttpSession session){
+        Object object = session.getAttribute("user");
+        String account = String.valueOf(object) ;
+        System.out.println(account);
+        List<Map> maps = homeService.getScore(account);
+        return new Msg().success().add("result",maps).add("user",account);
     }
 
     /*

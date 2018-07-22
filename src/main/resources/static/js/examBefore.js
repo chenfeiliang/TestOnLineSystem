@@ -40,9 +40,16 @@ function getTimeAndTitle()
 			data:{examinId:id},
 			dataType:"json",
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",//防止乱码
-			success:function(data){			
-				$("#titleSpan").append(data.extend.result.title);
-				totalTime = data.extend.result.time;		
+			success:function(data){
+			    if(data.code=="200"){
+                    $("#userSpan").append(data.extend.user);
+                    $("#titleSpan").append(data.extend.result.title);
+                    totalTime = data.extend.result.time;
+                }else{
+			        alert(data.extend.errorInfo);
+			        window.location.href="index.html";
+                }
+
 			},
 			error:function(){
 			   alert("fail");

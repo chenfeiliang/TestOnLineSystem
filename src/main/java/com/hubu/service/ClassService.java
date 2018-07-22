@@ -3,7 +3,6 @@ package com.hubu.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hubu.dao.ClassDAO;
-import com.hubu.dao.PageCountDAO;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.MyClass;
 import com.hubu.pojo.User;

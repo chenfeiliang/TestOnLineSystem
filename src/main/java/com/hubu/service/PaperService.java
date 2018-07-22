@@ -12,8 +12,7 @@ import com.hubu.utils.Myutils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class PaperService {
@@ -35,6 +34,21 @@ public class PaperService {
         }
     }
 
+    public  List<Map> getAllPaper(){
+        List<Paper> papers = paperDao.selectAllPaper();
+        List<Map> maps = new ArrayList<>();
+
+        Map<String,Object> map = null;
+
+        for (int i = 0 ; i <papers.size();i++){
+            map = new HashMap<>();
+            map.put("paperId",papers.get(i).getPaperId());
+            map.put("title",papers.get(i).getTitle());
+            maps.add(map);
+        }
+
+        return  maps;
+    }
 
 
     public Integer addPaperByRandom(String title, Integer lessonId,Integer level1Count,Integer level2Count,Integer level3Count) {

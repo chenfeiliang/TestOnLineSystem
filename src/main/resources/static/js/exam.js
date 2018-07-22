@@ -51,13 +51,14 @@ function getPaper()
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8",//防止乱码
 			success:function(data){		
 				if(data.code==200){
+                    $("#userSpan").append(data.extend.user);
 					$("#titleSpan").append(data.extend.result.title);
 					questions = data.extend.result.questions;
 					totalTime = data.extend.result.time;
 					paperIdTotal = data.extend.result.paperId;
 					WriteQuestion();					
 				}else{
-					alert("考试时间已过！");
+				    alert(data.extend.errorInfo);
 					window.location.href="index.html";
 				}
 
@@ -109,9 +110,7 @@ function getTimes(time){
 }
 
 function WriteQuestion(){
-	
-	
-			
+
             $.each(questions,function(index,item){
             	
             	var qtitle = $("<div></div>").append((index+1)+". "+item.title).attr("class","title").attr("id","title"+(index+1));
@@ -223,7 +222,9 @@ function finish(){
 				if(data.code==200){
 					alert("试卷提交完成");
 					window.location.href="index.html";
-				}
+				}else{
+                    alert(data.extend.errorInfo);
+                }
 			},
 			error:function(){
 			   alert("fail");

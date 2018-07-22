@@ -122,6 +122,14 @@ public class UserService {
         }
     }
 
+    public List<User> getUserByAccounts(String accounts){
+         String s = accounts.replaceAll(",", "','");
+        List<User> users = userDAO.selectUsers(s);
+        for (int i = 0 ;i<users.size();i++){
+            users.get(i).setPassword("");
+        }
+        return  users;
+    }
     public PageInfo<User> getUserByClassId(Integer classId,Integer currentPage) {
         try {
 

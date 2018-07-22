@@ -79,6 +79,13 @@ public class PaperController {
         return papers == null ? new Msg().fail() : new Msg().success().add("result",papers);
     }
 
+    @RequestMapping(path = "/getAllPaper",method = {RequestMethod.GET})
+    public Msg getAllPaper(){
+        List<Map> papers = paperService.getAllPaper();
+        return papers == null ? new Msg().fail() : new Msg().success().add("result",papers);
+    }
+
+
     /*
      * 输入：页码，关键词
      * 操作：通过关键词分页查询试卷信息

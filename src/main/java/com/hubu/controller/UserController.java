@@ -51,18 +51,14 @@ public class UserController {
         return userService.updateUser(user) == 1 ? new Msg().success() : new Msg().fail();
     }
 
-    /*
-     * 输入：页码
-     * 操作：分页查询用户信息
-     * 输出：用户列表
-     * */
-    @RequestMapping(path = "/getPageUser",method = {RequestMethod.GET})
-    @ResponseBody
-    public Msg getPageUser(Integer currentPage){
-        PageInfo<User> pageClass = userService.getPageUser(currentPage);
-        return pageClass == null ? new Msg().fail() : new Msg().success().add("result",pageClass);
 
+    @RequestMapping(path = "/getUserByAccounts",method = {RequestMethod.GET})
+    @ResponseBody
+    public Msg getUserByAccounts(String accounts){
+        List<User> users = userService.getUserByAccounts(accounts);
+        return users == null ? new Msg().fail() : new Msg().success().add("result",users);
     }
+
 
     /*
      * 输入：页码，关键词
@@ -75,6 +71,19 @@ public class UserController {
         PageInfo<User> pageClass = userService.getPageUserByKeyWord(currentPage,keyword);
         return pageClass == null ? new Msg().fail() : new Msg().success().add("result",pageClass);
     }
+
+    /*
+     * 输入：页码，关键词
+     * 操作：通过关键词分页查询用户信息
+     * 输出：用户列表
+     * */
+    @RequestMapping(value = "/getPageUser",method = {RequestMethod.GET})
+    @ResponseBody
+    public Msg getPageUser(int currentPage){
+        PageInfo<User> pageClass = userService.getPageUser(currentPage);
+        return pageClass == null ? new Msg().fail() : new Msg().success().add("result",pageClass);
+    }
+
 
     @RequestMapping(path = "/getUserByAccount",method = {RequestMethod.GET})
     @ResponseBody

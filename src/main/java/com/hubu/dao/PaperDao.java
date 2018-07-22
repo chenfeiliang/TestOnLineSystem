@@ -60,6 +60,19 @@ public interface PaperDao {
     })
     Paper selectPaperById(Integer paperId);
 
+    @Select({"select",SELECT_FIELDS,"from",TABLE_NAME})
+    @Results({
+            @Result(id = true,column = "paperId",property = "paperId"),
+            @Result(column = "title",property = "title"),
+            @Result(column = "lessonId",property = "lesson",
+                    one = @One(select = "com.hubu.dao.LessonDAO.selectLessonIdByName")
+            ),
+            @Result(column = "questionIds",property = "questionIds"),
+            @Result(column = "answer",property = "answer"),
+            @Result(column = "creator",property = "creator")
+    })
+    List<Paper> selectAllPaper();
+
     @Delete({"delete from",TABLE_NAME,"where paperId in (${paperIds})"})
     Integer batchDeletePaperById(@Param("paperIds") String paperIds);
 }

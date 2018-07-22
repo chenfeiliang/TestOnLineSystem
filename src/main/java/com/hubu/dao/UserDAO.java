@@ -33,6 +33,19 @@ public interface UserDAO {
     })
     List<User> selectUser();
 
+    @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME+"where account in ('${accounts}')"})
+    @Results({
+            @Result(id = true,column = "account",property = "account"),
+            @Result(column = "realName",property = "realName"),
+            @Result(column = "password",property = "password"),
+            @Result(column = "classId",property = "myClass",
+                    one = @One(select = "com.hubu.dao.ClassDAO.selectClassById")
+            ),
+            @Result(column = "mobile",property = "mobile"),
+            @Result(column = "image",property = "image")
+    })
+    List<User> selectUsers(@Param("accounts") String accounts);
+
     @Select({"select" + SELECT_FIELDS + "from" + TABLE_NAME + "where realName like '%${keyword}%' "})
     @Results({
             @Result(id = true,column = "account",property = "account"),

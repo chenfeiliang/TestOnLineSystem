@@ -5,12 +5,14 @@ import com.hubu.pojo.Examin;
 import com.hubu.pojo.Msg;
 import com.hubu.pojo.User;
 import com.hubu.service.ExamService;
+import com.hubu.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +29,14 @@ public class ExamController {
      *
      * */
     @RequestMapping(path = "/addExam",method = {RequestMethod.POST})
-    public Msg addExam(Examin examin){
+    public Msg addExam(Examin examin,String bTime,String eTime){
+        bTime.replaceAll("T", " ");
+        System.out.println(bTime);
+        eTime.replaceAll("T"," ");
+        Date bt =  DateUtil.StringToDate(bTime);
+        Date et = DateUtil.StringToDate(eTime);
+        examin.setBeginTime(bt);
+        examin.setEndTime(et);
         return examService.addExam(examin) == 1 ? new Msg().success() : new Msg().fail();
     }
 

@@ -38,7 +38,7 @@ public class CardService {
                 StringBuilder err = new StringBuilder();
                 for (int i = 0; i < key.length; i++) {
                     if (key[i].equals(cardAnwser[i]))
-                        ++point;
+                        point += 10;
                     else if (cardAnwser[i].equals("-1"))
                         continue;
                     else{
@@ -46,8 +46,15 @@ public class CardService {
                         err.append(cardAnwser[i] + ",");
                     }
                 }
-                errQuestionIds.setLength(errQuestionIds.length()-1);
-                err.setLength(err.length()-1);
+
+                if(errQuestionIds.length()>=1){
+                    errQuestionIds.setLength(errQuestionIds.length()-1);
+                }
+
+                if(err.length()>=1){
+                    err.setLength(err.length()-1);
+                }
+
                 Achievement achievement = new Achievement();
                 achievement.setAccount(card.getAccount());
                 achievement.setClassId(userDAO.selectUserByUserId(card.getAccount()).getMyClass().getClassId());
@@ -72,7 +79,8 @@ public class CardService {
 
 
             }else{
-                return cardDAO.updateCard(card.getExaminId(),card.getAccount(),card.getOptions());
+                return  0;
+                //return cardDAO.updateCard(card.getExaminId(),card.getAccount(),card.getOptions());
             }
 
         }catch (Exception e){
