@@ -27,7 +27,7 @@ function getExam(){
 				
 			},
 			error:function(){
-			   alert("fail");
+			   /*alert("fail");*/
 			 }
 	});	
 }

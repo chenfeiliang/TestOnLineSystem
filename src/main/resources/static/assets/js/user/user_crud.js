@@ -20,6 +20,11 @@ function select_user(currentPage){
     });
 }
 
+/**
+ * 根据班级id查询用户
+ * @param classId 班级id
+ * @param currentPage 当前页
+ */
 function select_user_byClass(classId,currentPage) {
     if (classId == 0){
         select_user(currentPage);

@@ -125,7 +125,7 @@ function send() {
             }
         },
         error:function(jqXHR){
-            alert("发生错误"+jqXHR.status);
+            /*alert("发生错误"+jqXHR.status);*/
         }
     })
 

@@ -64,7 +64,7 @@ function getPaper()
 
 			},
 			error:function(){
-			   alert("fail");
+			   /*alert("fail");*/
 			 }
 	});	
 }
@@ -159,6 +159,16 @@ function showQuestion(qid){
 	 questionIdTotal = qid;
 	 $(".cardID").removeClass("selectedCard");
 	 $("#cardId"+qid).addClass("selectedCard");
+
+    for(var i = 1 ; i <= questions.length;i++) {
+        var ops = document.getElementsByName("option" + i);
+        for (var j = 0; j < ops.length; j++) {
+            if (ops[j].checked) {
+                $("#cardId"+i).addClass("selectedCard");
+            }
+        }
+    }
+
 	 $(".title").hide();
      $(".optionOl").hide();
      $("#title"+qid).show();
@@ -227,7 +237,7 @@ function finish(){
                 }
 			},
 			error:function(){
-			   alert("fail");
+			   /*alert("fail");*/
 			 }
 	});	
 }

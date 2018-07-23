@@ -1,4 +1,4 @@
-var base_url = "http://192.168.43.105:8080/";
+var base_url = "http://localhost:8080/";
 
 /**
  * 页面间传递参数的方法

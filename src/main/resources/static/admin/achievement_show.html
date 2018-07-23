@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>成绩管理</title>
+    <link rel="stylesheet" href="../assets/vendors/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/vendors/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../assets/vendors/nprogress/nprogress.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <script src="../assets/vendors/nprogress/nprogress.js"></script>
+</head>
+<body>
+<script>NProgress.start()</script>
+<div class="main">
+    <nav class="navbar">
+    </nav>
+    <div class="container-fluid">
+        <div class="page-title">
+            <h1>成绩管理</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-12">
+                <div class="page-action">
+                    <button id="del_all" class="btn btn-danger btn-sm" data-ids="" style="display: none">批量删除</button>
+                    <form class="form-inline">
+                        <select id="all_class" name="" class="form-control input-sm">
+
+                        </select>
+                        <!--<input id="keyword" class="form-control input-sm" name="keyword" value="" placeholder="关键字查询">-->
+                        <!--<button class="btn btn-default btn-sm byKeyWord" type="button">筛选</button>-->
+                    </form>
+                    <ul class="pagination pagination-sm pull-right">
+                    </ul>
+                </div>
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th class="text-center" width="40"><input type="checkbox" data-cp=""></th>
+                        <th class="text-center">考生姓名</th>
+                        <th class="text-center">考场名称</th>
+                        <th class="text-center">考试课程</th>
+                        <th class="text-center">所在班级</th>
+                        <th class="text-center">所得分数</th>
+                        <th class="text-center" width="120">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="aside">
+</div>
+<script src="../assets/vendors/jquery/jquery.js"></script>
+<script src="../assets/vendors/bootstrap/js/bootstrap.js"></script>
+<!--引入layer插件-->
+<script src="../assets/vendors/layer-v3.1.1/layer/layer.js"></script>
+<!--引入配置js-->
+<script src="../assets/js/config.js"></script>
+<!--引入试卷的业务js-->
+<script src="../assets/js/achievement/achievement_crud.js"></script>
+<!--引入class-->
+<script src="../assets/js/user/show_class.js"></script>
+<script>
+    $(function () {
+        // 加载公共页面
+        $(".navbar").load("navbar.html");
+        $(".aside").load("aside.html");
+        select_achievement(1);
+        // 下拉列表change事件
+        $("#all_class").on("change",function () {
+            var cId = $(this).val();
+            // 根据班级查询学生
+            select_achievement_byClassId(cId,1);
+        });
+    })
+</script>
+<script>NProgress.done()</script>
+</body>
+</html>

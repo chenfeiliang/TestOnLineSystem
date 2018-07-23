@@ -22,6 +22,7 @@ $.ajax({
 function show_lesson_info(lesson_info) {
     // lessonHtmlRes 字符串 用来动态生成下拉列表
     var lessonHtmlRes = "";
+    var listLessonHtmlRes = "";
     // count 课程数量
     var count = 0;
     // lessonIdArray 存放所有课程的id
@@ -39,9 +40,14 @@ function show_lesson_info(lesson_info) {
         for (var i=0;i<count;i++){
             // 生成下拉框课程信息
             lessonHtmlRes += "<option value='"+lessonIdArray[i]+"'>"+lessonNameArray[i]+"</option>";
+            listLessonHtmlRes += "<option value='"+lessonIdArray[i]+"'>"+lessonNameArray[i]+"</option>";
         }
         $("#all_lesson").html(lessonHtmlRes);
+        $("#show_all_lesson").html(listLessonHtmlRes);
+        $("#use_lesson").html(listLessonHtmlRes);
     } else {
         $("#all_lesson").html("<option>~暂无课程信息~</option>");
+        $("#show_all_lesson").html("<option>~暂无课程信息~</option>");
+        $("#use_lesson").html("<option>~暂无课程信息~</option>");
     }
 }

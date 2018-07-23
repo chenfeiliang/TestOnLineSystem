@@ -1,6 +1,6 @@
 <div class="profile">
     <img class="avatar" src="../uploads/avatar.jpg">
-    <h3 class="name">布头儿</h3>
+    <h3 class="name"></h3>
 </div>
 <ul class="nav">
     <li id="index_page">
@@ -12,7 +12,7 @@
         </a>
         <ul id="menu-questions" class="collapse">
             <li id="all_question"><a href="question_show.html"><i class="fa fa-circle-o"></i>所有题目</a></li>
-            <li id="add_question"><a href="question_add.html"><i class="fa fa-plus-square-o"></i>出题</a></li>
+            <li id="add_question_aside"><a href="question_add.html"><i class="fa fa-plus-square-o"></i>出题</a></li>
         </ul>
     </li>
     <li id="paper_manage">
@@ -21,7 +21,7 @@
         </a>
         <ul id="menu-papers" class="collapse">
             <li id="all_paper"><a href="paper_show.html"><i class="fa fa-circle-o"></i>所有试卷</a></li>
-            <li id="add_paper"><a href="paper_add.html"><i class="fa fa-plus-square-o"></i>出卷</a></li>
+            <li id="add_paper_aside"><a href="javascript:void(0);"><i class="fa fa-plus-square-o"></i>出卷</a></li>
         </ul>
     </li>
     <li id="class_manage">
@@ -30,26 +30,29 @@
     <li id="lesson_manage">
         <a href="lesson_manage.html"><i class="fa fa-superpowers"></i>课程管理</a>
     </li>
-    <li>
-        <a href="#"><i class="fa fa-puzzle-piece"></i>考场管理</a>
+
+    <li id="examin_manage">
+        <a href="#menu-examins" class="collapsed" data-toggle="collapse">
+            <i class="fa fa-puzzle-piece"></i>考场管理<i class="fa fa-angle-right"></i>
+        </a>
+        <ul id="menu-examins" class="collapse">
+            <li id="all_examin"><a href="examin_show.html"><i class="fa fa-circle-o"></i>所有考场</a></li>
+            <li id="add_examin_aside"><a href="examin_add.html"><i class="fa fa-plus-square-o"></i>添加考场</a></li>
+        </ul>
     </li>
     <li id="user_manage">
         <a href="users.html"><i class="fa fa-user-circle-o"></i>用户管理</a>
     </li>
-    <li>
-        <a href="#menu-settings" class="collapsed" data-toggle="collapse">
-            <i class="fa fa-cogs"></i>其它<i class="fa fa-angle-right"></i>
-        </a>
-        <ul id="menu-settings" class="collapse">
-            <li><a href="#">导航菜单</a></li>
-            <li><a href="#">图片轮播</a></li>
-            <li><a href="#">网站设置</a></li>
-        </ul>
+    <li id="achievement">
+        <a href="achievement_show.html"><i class="fa fa-heart-o"></i>成绩查询</a>
     </li>
 </ul>
+<script src="../assets/vendors/jquery/jquery.js"></script>
 <!--引入layer插件-->
 <script src="../assets/vendors/layer-v3.1.1/layer/layer.js"></script>
 <script>
+    var adminName = sessionStorage.getItem("adminName");
+    $(".name").html(adminName);
     // 侧边导航高亮显示
     // 获取当前HTML页面路径
     var path = window.location.pathname;
@@ -63,22 +66,29 @@
         $("#all_question").addClass("active");
     } else if (name_flag === "question_add"){
         question_high();
-        $("#add_question").addClass("active");
+        $("#add_question_aside").addClass("active");
         // alert($("#add_question").hasClass("active"));
     } else if (name_flag === "paper_show"){
         paper_high();
         $("#all_paper").addClass("active");
     } else if (name_flag === "paper_add"){
         paper_high();
-        $("#add_paper").addClass("active");
+        $("#add_paper_aside").addClass("active");
     } else if (name_flag === "class_manage") {
         $("#class_manage").addClass("active");
     } else if (name_flag === "lesson_manage") {
         $("#lesson_manage").addClass("active");
+    } else if (name_flag === "examin_show") {
+        examin_high();
+        $("#all_examin").addClass("active");
+    } else if (name_flag === "examin_add") {
+        examin_high();
+        $("#add_examin_aside").addClass("active");
     } else if (name_flag === "users" || name_flag === "user_up") {
         $("#user_manage").addClass("active");
+    } else if (name_flag === "achievement_show"){
+        $("#achievement").addClass("active");
     }
-
     // 导航展开
     function question_high() {
         $("#menu-questions").addClass("in");
@@ -87,5 +97,60 @@
     function paper_high() {
         $("#menu-papers").addClass("in");
         $("#paper_manage").addClass("active");
+    }
+    function examin_high(){
+        $("#menu-examins").addClass("in");
+        $("#examin_manage").addClass("active");
+    }
+    $("#add_paper_aside").on("click",function () {
+        //示范一个公告层
+        layer.open({
+            type: 1
+            ,title: false //不显示标题栏
+            ,closeBtn: false
+            ,area: '300px;'
+            ,shade: 0.8
+            ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+            ,resize: false
+            ,btn: ['人工出卷', '系统出卷']
+            ,btnAlign: 'c'
+            ,moveType: 0 //拖拽模式，0或者1
+            ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">请选择您的出卷方式！<br /></div>'
+            ,success: function(layero){
+                var btn = layero.find('.layui-layer-btn');
+                btn.find('.layui-layer-btn0').on("click",function () {
+                    $(location).attr("href","paper_add.html");
+                })
+                btn.find('.layui-layer-btn1').on("click",function () {
+                    sys_add_paper();
+                })
+            }
+        });
+    });
+
+    function sys_add_paper() {
+        var SystemAddPaperHtmlRes = "<div class=\"col-md-7\" style='margin-left: 90px;'>" +
+            "<form id=\"sys_add_paper\"><div class=\"form-group\">"+
+            "<h5>题目总数为10</h5><br /><label for=\"title\">试卷标题：</label>"+
+            "<input id=\"title\" class=\"form-control\" name=\"title\" type=\"text\" placeholder=\"试卷标题\">"+
+            "<label for=\"all_lesson_aside\">所属课程：</label>"+
+            "<select id=\"all_lesson_aside\" class=\"form-control input-sm\"></select>"+
+            "<label for=\"simple\">难度为容易的题目数量：</label>"+
+            "<input id=\"simple\" class=\"form-control\" name=\"level1Count\" type=\"text\" placeholder=\"容易题数量\">"+
+            "<label for=\"commonly\">难度为一般的题目数量：</label>"+
+            "<input id=\"commonly\" class=\"form-control\" name=\"level2Count\" type=\"text\" placeholder=\"一般题数量\">"+
+            "<label for=\"difficulty\">难度为困难的题目数量：</label>"+
+            "<input id=\"difficulty\" class=\"form-control\" name=\"level3Count\" type=\"text\" placeholder=\"困难题数量\">"+
+            "</div><div class=\"form-group\">"+
+            "<a id=\"system_addPaper\" class=\"btn btn-primary\" href=\"javascript:void(0);\">提交出卷</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:void(0);' class='btn btn-default close_sys_add'>关闭窗口</a></div></form></div>";
+        SystemAddPaperHtmlRes += "<script src='../assets/js/paper/paper_sys_show_lesson.js'><\/script>";
+        SystemAddPaperHtmlRes += "<script src='../assets/js/paper/paper_sys_add.js'><\/script>";
+        //页面层
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-rim', //加上边框
+            area: ['420px', '500px'], //宽高
+            content: SystemAddPaperHtmlRes
+        });
     }
 </script>

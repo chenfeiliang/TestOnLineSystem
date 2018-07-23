@@ -53,10 +53,10 @@
           <div class="form-group">
             <label for="questionKey">标准答案：</label>
             <select id="questionKey" class="form-control" name="questionKey">
-              <option value="A">A</option>
-              <option value="B">B</option>
-              <option value="C">C</option>
-              <option value="D">D</option>
+              <option value="a">a</option>
+              <option value="b">b</option>
+              <option value="c">c</option>
+              <option value="d">d</option>
             </select>
           </div>
           <div class="form-group">
@@ -98,6 +98,7 @@
   <script src="../assets/vendors/jquerysession/jquerysession.js"></script>
   <!--引入课程信息下拉列表-->
   <script src="../assets/js/question/show_lesson.js"></script>
+  <script src="../assets/js/question/question_add.js"></script>
   <script>
     $(function () {
         // 加载公共页面
@@ -105,7 +106,6 @@
         $(".aside").load("aside.html");
     })
   </script>
-  <script src="../assets/js/question/question_add.js"></script>
   <script>NProgress.done()</script>
 </body>
 </html>

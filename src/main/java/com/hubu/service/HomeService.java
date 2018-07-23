@@ -3,6 +3,7 @@ package com.hubu.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hubu.dao.*;
+import com.hubu.dto.QuestionDTO;
 import com.hubu.pojo.*;
 import com.hubu.utils.DateUtil;
 import com.hubu.utils.Myutils;
@@ -22,6 +23,9 @@ public class HomeService {
 
     @Autowired
     CardDAO cardDAO;
+
+    @Autowired
+    WrongDAO wrongDAO;
 
     @Autowired
     AchievementDAO achievementDAO;
@@ -113,6 +117,10 @@ public class HomeService {
 
                     List<Question> questions = questionDAO.selectQuestionByIds(examin.getPaper().getQuestionIds());
 
+                    for ( Question question : questions){
+                        question.setQuestionKey("");
+                    }
+
                     map.put("paperId",paperId);
 
                     map.put("questions",questions);
@@ -133,6 +141,64 @@ public class HomeService {
             return new Msg().fail().add("errorInfo","系统错误");
         }
     }
+
+
+    public Msg getWrongExamIdAndAccount(Integer examinId, String account){
+        try {
+
+                Examin examin = examDAO.selectExamByExaminId(examinId);
+
+                Map<String,Object> map = new HashMap<>();
+
+                Integer paperId= examin.getPaper().getPaperId();
+
+                List<Question> questions = questionDAO.selectQuestionByIds(examin.getPaper().getQuestionIds());
+
+                List<QuestionDTO> questionDAOS = new ArrayList<>();
+
+                Wrong wrong = wrongDAO.selectWrongByExaminIdAndAccount(examinId,account);
+                System.out.println(wrong.getQuestionIds());
+                String [] wrongQuestions = wrong.getQuestionIds().split(",");
+                String [] options = wrong.getOptions().split(",");
+
+                for(int i = 0 ;i<questions.size();i++){
+
+                    QuestionDTO questionDTO = new QuestionDTO();
+                    questionDTO.setQuestionId(questions.get(i).getQuestionId()) ;
+                    questionDTO.setTitle(questions.get(i).getTitle());
+                    questionDTO.setOptionA(questions.get(i).getOptionA());
+                    questionDTO.setOptionB(questions.get(i).getOptionB());
+                    questionDTO.setOptionC(questions.get(i).getOptionC());
+                    questionDTO.setOptionD(questions.get(i).getOptionD());
+                    questionDTO.setQuestionKey(questions.get(i).getQuestionKey());
+                    questionDTO.setQuestionLevel(questions.get(i).getQuestionLevel());
+                    questionDTO.setLessonId(questions.get(i).getLessonId());
+                    questionDTO.setCreator(questions.get(i).getCreator());
+
+                    int qid = questions.get(i).getQuestionId();
+                    for(int j = 0 ;j<wrongQuestions.length;j++){
+                        if(Integer.parseInt(wrongQuestions[j])==qid){
+                            questionDTO.setIsWrong(1);
+                            questionDTO.setWrongKey(options[j]);
+                        }
+                    }
+                    questionDAOS.add(questionDTO);
+                }
+
+                map.put("questions",questionDAOS);
+
+                map.put("title",examin.getTitle());
+
+                return new Msg().success().add("result",map).add("user",account);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Msg().fail().add("errorInfo","系统错误");
+        }
+    }
+
+
+
 
     public Map getExamTitleAndTimeById(Integer examinId,String account) {
         try {

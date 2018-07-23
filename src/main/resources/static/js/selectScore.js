@@ -27,7 +27,7 @@ function getScore(){
 				
 			},
 			error:function(){
-			   alert("fail");
+			  /* alert("fail");*/
 			 }
 	});	
 }

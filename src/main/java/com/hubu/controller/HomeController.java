@@ -102,6 +102,21 @@ public class HomeController {
         return homeService.getCardByExamId(examinId,account);
     }
 
+    /*
+     * 输入：
+     * 操作：使用Session中的userId，查找试卷信息
+     * 输出：试卷信息
+     * */
+
+    @RequestMapping("/getWrongByExamId")
+    public Msg getWrongByExamId(Integer examinId,HttpSession session){
+
+        Object object = session.getAttribute("user");
+        String account = String.valueOf(object) ;
+
+        return homeService.getWrongExamIdAndAccount(examinId,account);
+    }
+
 
 
     /*

@@ -9,11 +9,6 @@ var add_btn = $("#add_all");
 var tbody_input = $("#questions input");
 var thead_input = $(".questions");
 thead_input.prop("checked",false);
-// for (var i=0;i<dataArray.length;i++){
-//     $.each(tbody_input,function (i,item) {
-//         alert(dataArray);
-//     })
-// }
 
 // 每有一个checkbox被选中,将对应用户id存入dataArray数组中
 tbody_input.on("change", function () {

@@ -36,6 +36,6 @@ function show_B(B) {
 function show_C(C) {
     layer.alert(C);
 }
-function show_D(C) {
-    layer.alert(C);
+function show_D(D) {
+    layer.alert(D);
 }

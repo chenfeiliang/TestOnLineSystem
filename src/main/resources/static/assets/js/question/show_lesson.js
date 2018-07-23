@@ -1,4 +1,3 @@
-$.session.set('admin_name', 'zhangsan');
 $.ajax({
     url: base_url + "getAllLesson",
     type: "GET",

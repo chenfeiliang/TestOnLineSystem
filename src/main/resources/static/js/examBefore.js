@@ -52,7 +52,7 @@ function getTimeAndTitle()
 
 			},
 			error:function(){
-			   alert("fail");
+			   /*alert("fail");*/
 			 }
 	});	
 }

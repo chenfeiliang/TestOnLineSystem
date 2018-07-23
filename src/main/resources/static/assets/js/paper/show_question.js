@@ -11,7 +11,7 @@ function select_questions(currentPage){
         dataType:"json",
         success: function (response) {
             if (response.msg){
-                show_questions_info(response.extend.result.list,response.extend.result["pages"],currentPage,response.extend.result.navigatepageNums);
+                show_questions_info(response.extend.result.list,response.extend.result["pages"],currentPage,response.extend.result.navigatepageNums,false);
             }
         },
         error: function(a, b) {
@@ -20,17 +20,22 @@ function select_questions(currentPage){
     });
 }
 
-function select_user_byClass(classId,currentPage) {
-    if (classId == 0){
-        select_user(currentPage);
+/**
+ * 根据课程id查找对应题库的方法
+ * @param currentPage 当前页
+ * @param lessonId 课程id
+ */
+function select_questions_byLessonId(currentPage,lessonId) {
+    if (lessonId == 0){
+        select_questions(currentPage);
     } else {
         $.ajax({
-            url: base_url + "getUserByClassId?classId=" + classId + "&currentPage=" + currentPage,
+            url: base_url + "getQuestionByLessonId?currentPage=" + currentPage + "&lessonId=" + lessonId,
             type: "GET",
             dataType:"json",
             success: function (response) {
                 if (response.msg){
-                    show_user_info(response.extend.result.list,response.extend.result["pages"],currentPage,response.extend.result.navigatepageNums);
+                    show_questions_info(response.extend.result.list,response.extend.result["pages"],currentPage,response.extend.result.navigatepageNums,true);
                 }
             },
             error: function(a, b) {
@@ -46,8 +51,9 @@ function select_user_byClass(classId,currentPage) {
  * @param pageCount 总页数
  * @param currentPage 当前页
  * @param pageArray 页码
+ * @param ByLessonIdFlag 标志
  */
-function show_questions_info(questionsInfo,pageCount,currentPage,pageArray) {
+function show_questions_info(questionsInfo,pageCount,currentPage,pageArray,ByLessonIdFlag = false) {
     // alert("显示用户信息ok");
     // count 当前页的用户数量
     var count = 0;
@@ -78,8 +84,8 @@ function show_questions_info(questionsInfo,pageCount,currentPage,pageArray) {
                 pageHtmlRes += "<li><a href=\"javascript:void(0);\" class='page' data-cp='"+i+"'>"+i+"</a></li>";
             }
         }
-        // 引入自定义分页js
-        pageHtmlRes += "<script src='../assets/js/paper/page.js' />"
+        // 根据关键字标志引入自定义分页js
+        pageHtmlRes += ByLessonIdFlag ? "<script src='../assets/js/paper/bylessonid_page.js' />" : "<script src='../assets/js/paper/page.js' />";
         $(".question_page").html(pageHtmlRes);
     } else if (pageCount >= 6) {
         // 总页数大于5页
@@ -102,23 +108,23 @@ function show_questions_info(questionsInfo,pageCount,currentPage,pageArray) {
         pageHtmlRes += "<script src='../assets/js/paper/page.js' />"
         $(".question_page").html(pageHtmlRes);
     }
-    // ======生成用户信息表格======
+    // ======生成题目信息表格======
     if (count>0){
         $(".questions").data("cp",currentPage);
-        alert(currentPage);
         for (var i=0;i<count;i++){
             // 生成题目信息表格HTML代码
             questionHtmlRes += "<tr><td class='text-center'><input type='checkbox' data-id='"+questionIdArray[i]+"'></td>"+
                 "<td class='text-center'>"+questionTitleArray[i]+"</td>"+
-                "<td class='text-center'><a href='javascript:void(0);' class='btn btn-info btn-xs' data-id='"+questionIdArray[i]+"'>编辑</a><a href='javascript:void(0);' class='btn btn-danger btn-xs' data-id='"+questionIdArray[i]+"'>删除</a></td></tr>";
+                "<td class='text-center'><a href='javascript:void(0);' class='btn btn-info btn-xs complete_question' data-id='"+questionIdArray[i]+"'>完整试题</a></td>"+
+                "<td class='text-center'><a href='javascript:void(0);' class='btn btn-info btn-xs add_paper_list' data-id='"+questionIdArray[i]+"'>加入列表</a></td></tr>";
         }
         // 引入自定义js
-        questionHtmlRes += "<script src='../assets/js/paper/question_checkbox.js' /><script src='../assets/js/user/user_edit.js'></script>";
+        questionHtmlRes += "<script src='../assets/js/paper/question_checkbox.js' /><script src='../assets/js/paper/complete_question.js'></script>";
         $("#questions").html(questionHtmlRes);
         layer.msg('题库加载完毕',{
             time: 1000, //1s后自动关闭
         });
     } else {
-        $("#questions").html("<tr><td colspan='3' class='text-center'>~暂无相关题库数据~</td></tr>");
+        $("#questions").html("<tr><td colspan='4' class='text-center'>~暂无相关题库数据~</td></tr>");
     }
 }

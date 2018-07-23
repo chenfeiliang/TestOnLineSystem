@@ -127,8 +127,8 @@ function show_question_info(questionInfo,pageCount,currentPage,pageArray,keyWord
             qD = qDArray[i].length > 9 ? qDArray[i].substr(0,9)+"..." : qDArray[i];
             // 生成题目信息表格HTML代码
             questionHtmlRes += "<tr><td class='text-center'><input type='checkbox' data-id='"+qIdArray[i]+"'></td>"+
-                "<td class='text-center keyword'>"+qTitle+"</td>"+
-                "<td class='text-center' onclick=\"show_B('"+qAArray[i]+"')\">"+qA+"</td>"+
+                "<td class='text-center keyword' onclick=\"show_title('"+qTitleArray[i]+"')\">"+qTitle+"</td>"+
+                "<td class='text-center' onclick=\"show_A('"+qAArray[i]+"')\">"+qA+"</td>"+
                 "<td class='text-center' onclick=\"show_B('"+qBArray[i]+"')\">"+qB+"</td>"+
                 "<td class='text-center' onclick=\"show_C('"+qCArray[i]+"')\">"+qC+"</td>"+
                 "<td class='text-center' onclick=\"show_D('"+qDArray[i]+"')\">"+qD+"</td>"+

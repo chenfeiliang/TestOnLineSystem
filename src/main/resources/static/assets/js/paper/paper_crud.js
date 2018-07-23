@@ -6,7 +6,7 @@ function select_paper(currentPage){
     // alert("查询试卷信息ok");
     // alert("当前页："+currentPage);
     $.ajax({
-        url: base_url + "getPagePaper?currentPage=" + currentPage,
+            url: base_url + "getPagePaper?currentPage=" + currentPage,
         type: "GET",
         dataType:"json",
         success: function (response) {
@@ -100,8 +100,8 @@ function show_paper_info(paperInfo,pageCount,currentPage,pageArray) {
                 "<td class='text-center'>"+paperTitleArray[i]+"</td>"+
                 "<td class='text-center'>"+paperLessonNameArray[i]+"</td>"+
                 "<td class='text-center'>"+paperCreatorArray[i]+"</td>"+
-                "<td class='text-center'><a href='javascript:;' class='btn btn-info btn-xs show_questions'>查看试题</a></td>"+
-                "<td class='text-center'><a href='javascript:;' class='btn btn-info btn-xs show_key'>查看答案</a></td>"+
+                "<td class='text-center'><a href='javascript:;' class='btn btn-info btn-xs show_questions' data-id='"+paperIdArray[i]+"'>查看试题</a></td>"+
+                "<td class='text-center'><a href='javascript:;' class='btn btn-info btn-xs show_key' data-id='"+paperIdArray[i]+"'>查看答案</a></td>"+
                 "<td class='text-center'><a href='javascript:void(0);' class='btn btn-info btn-xs up_paper' data-id='"+paperIdArray[i]+"'>编辑</a>&nbsp;&nbsp;<a href='javascript:void(0);' class='btn btn-danger btn-xs del_one' data-id='"+paperIdArray[i]+"'>删除</a></td></tr>";
         }
         // 引入自定义js
@@ -111,6 +111,6 @@ function show_paper_info(paperInfo,pageCount,currentPage,pageArray) {
             time: 1000, //1s后自动关闭
         });
     } else {
-        $("tbody").html("<tr><td colspan='7' class='text-center'>~暂无相关班级用户数据~</td></tr>");
+        $("tbody").html("<tr><td colspan='7' class='text-center'>~暂无相关试卷~</td></tr>");
     }
 }

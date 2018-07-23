@@ -1,7 +1,6 @@
-var paperId = $("tbody input").data("id");
-
 // 查看试题按钮点击事件
 $(".show_questions").on("click",function () {
+    var paperId = $(this).data("id");
     $.ajax({
         url: base_url + "getPaperById?paperId=" + paperId,
         type: "GET",
@@ -19,6 +18,7 @@ $(".show_questions").on("click",function () {
 
 // 查看答案按钮点击事件
 $(".show_key").on("click",function () {
+    var paperId = $(this).data("id");
     $.ajax({
         url: base_url + "getPaperById?paperId=" + paperId,
         type: "GET",

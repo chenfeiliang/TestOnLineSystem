@@ -145,7 +145,6 @@ function add_class() {
  * @param url
  */
 function del_class(url,cp){
-    alert("删除的方法ok");
     var _url = base_url + url;
     //询问框
     layer.confirm('你确定要删除吗?', {

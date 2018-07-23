@@ -4,8 +4,7 @@ var optionB = $("#optionB");
 var optionC = $("#optionC");
 var optionD = $("#optionD");
 $("#add_question").on("click",function () {
-    // alert("ok");
-    $("#creator").val($.session.get('admin_name'));
+    $("#creator").val(sessionStorage.getItem('adminName'));
     var _url = base_url + "addQuestion";
     // 表单校验
     if (!check_form()){return;}

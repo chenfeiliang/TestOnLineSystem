@@ -10,6 +10,7 @@ import com.hubu.pojo.Question;
 import com.hubu.utils.Myutils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 import java.util.List;
 
@@ -24,6 +25,11 @@ public class QuestionService {
 
     public Integer addQuestion(Question question) {
         try {
+            question.setTitle(HtmlUtils.htmlEscape(question.getTitle()));
+            question.setOptionA(HtmlUtils.htmlEscape(question.getOptionA()));
+            question.setOptionB(HtmlUtils.htmlEscape(question.getOptionB()));
+            question.setOptionC(HtmlUtils.htmlEscape(question.getOptionC()));
+            question.setOptionD(HtmlUtils.htmlEscape(question.getOptionD()));
             Integer integer = questionDAO.insertQuestion(question);
             return integer;
         }catch (Exception e){

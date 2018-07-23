@@ -30,9 +30,8 @@ public class ExamController {
      * */
     @RequestMapping(path = "/addExam",method = {RequestMethod.POST})
     public Msg addExam(Examin examin,String bTime,String eTime){
-        bTime.replaceAll("T", " ");
-        System.out.println(bTime);
-        eTime.replaceAll("T"," ");
+        bTime =  bTime.replaceAll("T", " ");
+        eTime = eTime.replaceAll("T"," ");
         Date bt =  DateUtil.StringToDate(bTime);
         Date et = DateUtil.StringToDate(eTime);
         examin.setBeginTime(bt);

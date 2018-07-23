@@ -41,7 +41,7 @@ $("#update_question").on("click",function () {
             questionKey:jq_questionKey.val(),
             questionLevel:jq_questionLevel.val(),
             lessonId:jq_lessonId.val(),
-            creator:$.session.get('admin_name')
+            creator:sessionStorage.getItem("adminName")
         },
         function (response) {
         if (response.msg){
